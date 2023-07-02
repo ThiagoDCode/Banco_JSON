@@ -1,2 +1,2 @@
-# Sistema de Banco usando JSON como Banco-Dados              
-###          by Thiago DallasDev                          
+# Sistema de Bancário (usando *JSON* como Banco-Dados)              
+###             by Thiago DallasDev                          
