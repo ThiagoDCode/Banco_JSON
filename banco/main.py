@@ -1,5 +1,5 @@
 from random import choice
-from complementos import menu, erro_cor
+from complementos import *
 import os
 
 
@@ -48,7 +48,7 @@ while True:
     elif options == 1:
         os.system('cls')
         nome_cliente = input('Nome do Cliente: ').strip().title()
-        cpf_cliente = input('CPF do Cliente (ex: 000.000.000-00): ')
+        cpf_cliente = verify_cpf('CPF do Cliente: ')
         deposito_inicial = float(input('Valor de Depósito: R$'))
         num_conta = str(choice(range(1000, 9999)))
 
