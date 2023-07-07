@@ -34,7 +34,7 @@ class Banco:
         try:
             valor_saque = float(input('Valor do saque: R$'))
             if valor_saque <= self.__saldo:
-                self.__saldo -= valor_saque if valor_saque > 0 else (-valor_saque)
+                self.__saldo -= valor_saque if valor_saque > 0 else (-valor_saque)  # TODO: vê melhor forma de converter
                 print(f'\nSAQUE EFETUADO COM SUCESSO!\n'
                       f'SALDO: R${self.__saldo:.2f}\n')
                 os.system('pause')
