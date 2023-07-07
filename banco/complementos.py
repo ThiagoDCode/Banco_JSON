@@ -34,8 +34,8 @@ def verify_cpf(texto: str) -> str:
     while True:
         cpf_entrada = input(texto).replace('.', '').replace('-', '').replace(' ', '')
 
-        if len(cpf_entrada) < 11:
-            print('\nCPF INVÁLIDO! Número CPF requer no mínimo 11 números (ex: 000.000.000-00)')
+        if len(cpf_entrada) != 11:
+            print(erro_cor('\nCPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)'))
         else:
             cpf = f'{cpf_entrada[:3]}.{cpf_entrada[3:6]}.{cpf_entrada[6:9]}-{cpf_entrada[9:]}'
             return cpf

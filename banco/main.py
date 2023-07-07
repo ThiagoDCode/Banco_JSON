@@ -15,24 +15,34 @@ class Banco:
               f'CLIENTE: {self.__cliente}   CPF: {self.__cpf}   CONTA: {self.__conta}\n'
               f'SALDO: R${self.__saldo:.2f}')
 
-    def depositar(self, valor_deposito):
-        if valor_deposito > 0:
-            self.__saldo += valor_deposito
-            print(f'\nDEPÓSITO EFETUADO COM SUCESSO! R$+{valor_deposito:.2f}\n'
-                  f'SALDO: R${self.__saldo:.2f}\n')
-            os.system('pause')
-        else:
-            print(erro_cor('ERRO! Valores negativos não é válido para depósito\n'))
+    def depositar(self):
+        try:
+            valor_deposito = float(input('Valor do depósito: R$'))
+            if valor_deposito > 0:
+                self.__saldo += valor_deposito
+                print(f'\nDEPÓSITO EFETUADO COM SUCESSO!\n'
+                      f'SALDO: R${self.__saldo:.2f}\n')
+                os.system('pause')
+            else:
+                print(erro_cor('ERRO! Valores negativos não é válido para depósito\n'))
+                os.system('pause')
+        except ValueError:
+            print(erro_cor('\nERRO! Valor de depósito inválido\n'))
             os.system('pause')
 
-    def sacar(self, valor_saque):
-        if valor_saque <= self.__saldo:
-            self.__saldo -= valor_saque
-            print(f'\nSAQUE EFETUADO COM SUCESSO! R$-{valor_saque:.2f}\n'
-                  f'SALDO: R${self.__saldo:.2f}\n')
-            os.system('pause')
-        else:
-            print(erro_cor('ERRO! Saldo insuficiente\n'))
+    def sacar(self):
+        try:
+            valor_saque = float(input('Valor do saque: R$'))
+            if valor_saque <= self.__saldo:
+                self.__saldo -= valor_saque if valor_saque > 0 else (-valor_saque)
+                print(f'\nSAQUE EFETUADO COM SUCESSO!\n'
+                      f'SALDO: R${self.__saldo:.2f}\n')
+                os.system('pause')
+            else:
+                print(erro_cor('ERRO! Saldo insuficiente\n'))
+                os.system('pause')
+        except ValueError:
+            print(erro_cor('ERRO! Valor de saque inválido'))
             os.system('pause')
 
 
@@ -47,10 +57,16 @@ while True:
 
     elif options == 1:
         os.system('cls')
+
         nome_cliente = input('Nome do Cliente: ').strip().title()
         cpf_cliente = verify_cpf('CPF do Cliente: ')
-        deposito_inicial = float(input('Valor de Depósito: R$'))
         num_conta = str(choice(range(1000, 9999)))
+        while True:
+            try:
+                deposito_inicial = float(input('Valor de Depósito: R$'))
+                break
+            except ValueError:
+                print(erro_cor('\nERRO! Valor de depósito inválido'))
 
         contas_clientes[num_conta] = Banco(nome_cliente, cpf_cliente, num_conta, deposito_inicial)
         print(f'\n|> CONTA CRIADA COM SUCESSO! <|\n'
@@ -76,11 +92,6 @@ while True:
                     break
                 elif saque_deposito == 1:
                     os.system('cls')
-                    contas_clientes[buscar].sacar(
-                        float(input('Valor a Sacar: R$'))
-                    )
+                    contas_clientes[buscar].sacar()
                 elif saque_deposito == 2:
-                    os.system('cls')
-                    contas_clientes[buscar].depositar(
-                        float(input('Valor a Depositar: R$'))
-                    )
+                    os.system('cls'), contas_clientes[buscar].depositar()
