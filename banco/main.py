@@ -49,49 +49,49 @@ class Banco:
 contas_clientes = {}
 while True:
     os.system('cls')
-    options = menu('ABRIR CONTA', 'ACESSAR CONTA', 'ENCERRAR SESSÃO')
+    match menu('ABRIR CONTA', 'ACESSAR CONTA', 'ENCERRAR SESSÃO'):
 
-    if options == 3:
-        print('\nObrigado por escolher o Dalla$ Bank')
-        break
+        case 3:
+            print('\nObrigado por escolher o Dalla$ Bank')
+            break
 
-    elif options == 1:
-        os.system('cls')
+        case 1:
+            os.system('cls')
 
-        nome_cliente = input('Nome do Cliente: ').strip().title()
-        cpf_cliente = verify_cpf('CPF do Cliente: ')
-        num_conta = str(choice(range(1000, 9999)))
-        while True:
-            try:
-                deposito_inicial = float(input('Valor de Depósito: R$'))
-                break
-            except ValueError:
-                print(erro_cor('\nERRO! Valor de depósito inválido'))
-
-        contas_clientes[num_conta] = Banco(nome_cliente, cpf_cliente, num_conta, deposito_inicial)
-        print(f'\n|> CONTA CRIADA COM SUCESSO! <|\n'
-              f'CLIENTE: {nome_cliente}    CPF: {cpf_cliente}   CONTA: {num_conta}\n'
-              f'DEPÓSITO: R${deposito_inicial:.2f}\n')
-        os.system('pause')
-
-    elif options == 2:
-        buscar = input('Número da Conta: ')
-        os.system('cls')
-
-        while True:
-            try:
-                contas_clientes[buscar].info_cliente()
-            except KeyError:
-                print(erro_cor('ERRO! Desculpe, conta não encontrada\n'))
-                os.system('pause')
-                break
-            else:
-                saque_deposito = menu('SACAR', 'DEPOSITAR', 'VOLTAR')
-
-                if saque_deposito == 3:
+            nome_cliente = input('Nome do Cliente: ').strip().title()
+            cpf_cliente = verify_cpf('CPF do Cliente: ')
+            num_conta = str(choice(range(1000, 9999)))
+            while True:
+                try:
+                    deposito_inicial = float(input('Valor de Depósito: R$'))
                     break
-                elif saque_deposito == 1:
-                    os.system('cls')
-                    contas_clientes[buscar].sacar()
-                elif saque_deposito == 2:
-                    os.system('cls'), contas_clientes[buscar].depositar()
+                except ValueError:
+                    print(erro_cor('\nERRO! Valor de depósito inválido'))
+
+            contas_clientes[num_conta] = Banco(nome_cliente, cpf_cliente, num_conta, deposito_inicial)
+            print(f'\n|> CONTA CRIADA COM SUCESSO! <|\n'
+                  f'CLIENTE: {nome_cliente}    CPF: {cpf_cliente}   CONTA: {num_conta}\n'
+                  f'DEPÓSITO: R${deposito_inicial:.2f}\n')
+            os.system('pause')
+
+        case 2:
+            buscar = input('Número da Conta: ')
+            os.system('cls')
+
+            while True:
+                try:
+                    contas_clientes[buscar].info_cliente()
+                except KeyError:
+                    print(erro_cor('ERRO! Desculpe, conta não encontrada\n'))
+                    os.system('pause')
+                    break
+                else:
+                    saque_deposito = menu('SACAR', 'DEPOSITAR', 'VOLTAR')
+
+                    if saque_deposito == 3:
+                        break
+                    elif saque_deposito == 1:
+                        os.system('cls')
+                        contas_clientes[buscar].sacar()
+                    elif saque_deposito == 2:
+                        os.system('cls'), contas_clientes[buscar].depositar()
