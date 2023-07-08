@@ -1,5 +1,3 @@
-
-
 def menu(*options):
     print(f'+{"=" * 30}+')
     print(f'|{"MENU":^30}|')
@@ -31,10 +29,10 @@ def verify_cpf(texto: str) -> str:
     :return: Retorna o número CPF (formato padrão)
     """
 
-    while True:  # TODO: criar uma verificação se os dados-CPF são números
+    while True:
         cpf_entrada = input(texto).replace('.', '').replace('-', '').replace(' ', '')
 
-        if len(cpf_entrada) != 11:
+        if len(cpf_entrada) != 11 or not cpf_entrada.isdigit():
             print(erro_cor('\nCPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)'))
         else:
             cpf = f'{cpf_entrada[:3]}.{cpf_entrada[3:6]}.{cpf_entrada[6:9]}-{cpf_entrada[9:]}'
