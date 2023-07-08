@@ -31,7 +31,7 @@ def verify_cpf(texto: str) -> str:
     :return: Retorna o número CPF (formato padrão)
     """
 
-    while True:
+    while True:  # TODO: criar uma verificação se os dados-CPF são números
         cpf_entrada = input(texto).replace('.', '').replace('-', '').replace(' ', '')
 
         if len(cpf_entrada) != 11:
