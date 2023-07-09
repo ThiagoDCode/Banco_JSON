@@ -2,6 +2,7 @@ from random import choice
 from lib_def import *
 import os
 import json
+from time import sleep
 
 
 class Banco:
@@ -73,6 +74,21 @@ def acc_account(arquivo):
     return contas_clientes
 
 
+def save_changes(arquivo):
+    """ Salva modificações feitas no Objeto no arquivo JSON
+
+    Args:
+        arquivo (_type_): Arquivo JSON
+    """
+    
+    update = []
+    for cliente in contas_clientes.keys():
+        update.append(contas_clientes[cliente].__dict__)
+
+    with open(arquivo, 'w', encoding='UTF-8') as save:
+        save.write(json.dumps(update, ensure_ascii=False, indent=4))
+
+
 # ARMAZENARÁ TODOS OS OBJETOS DA CLASSE BANCO
 contas_clientes = {}
 
@@ -116,6 +132,9 @@ while True:
                         contas_clientes[buscar].info_cliente()
                         match menu('SACAR', 'DEPOSITAR', 'SAIR DA CONTA'):
                             case 3:
+                                save_changes('arquivos_banco.json')
+                                print('\n>>> SAINDO DA CONTA...')
+                                sleep(3)
                                 break
                             case 1:
                                 os.system('cls')
