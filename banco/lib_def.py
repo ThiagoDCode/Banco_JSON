@@ -1,6 +1,10 @@
+import os
+import json
+
+
 def menu(*options):
     print(f'+{"=" * 30}+')
-    print(f'|{"<<< Dalla$$ Bank >>>":=^30}|')
+    print(f'|{"<< Dalla$$ Bank >>":=^30}|')
     print(f'+{"-" * 30}+')
     for n, opt in enumerate(options):
         print(f'|{f" [{n+1}] - {opt}":30}|')
@@ -99,6 +103,28 @@ def verify_pass(txt: str) -> int:
             print(erro_cor('ERRO! A senha deve conter apenas dígitos\n'))
 
 
+def save_dados(arquivo, dados):
+    """ Converte o Objeto e uma lista de dicionários e os salva em arquivo JSON
+
+    :param arquivo: Nome do arquivo de dados
+    :param dados: Dados que serão convertidos e salvos
+    """
+
+    if not os.path.exists(arquivo):
+        # O primeiro dado será salvo como uma lista de dicionários (por isso: [.__dict__])
+        dados_iniciais = [dados.__dict__]
+        with open(arquivo, 'w', encoding='UTF-8') as save:
+            save.write(json.dumps(dados_iniciais, ensure_ascii=False, indent=4))
+    else:
+        with open(arquivo, 'r', encoding='UTF-8') as file:
+            deserialized = json.load(file)
+            file.close()
+
+        # Os dados posteriores serão adicionados como dicionários, a lista criada inicialmente
+        deserialized.append(dados.__dict__)
+        with open(arquivo, 'w', encoding='UTF-8') as save:
+            save.write(json.dumps(deserialized, ensure_ascii=False, indent=4))
+
+
 if __name__ == '__main__':
-    deposito = verify_num('Valor: R$')
-    print(deposito)
+    print()
