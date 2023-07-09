@@ -4,9 +4,10 @@ import os
 
 
 class Banco:
-    def __init__(self, cliente, cpf, conta, saldo):
+    def __init__(self, cliente, cpf, senha, conta, saldo):
         self.__cliente = cliente
         self.__cpf = cpf
+        self.__senha = senha
         self.__conta = conta
         self.__saldo = saldo
 
@@ -22,13 +23,10 @@ class Banco:
                 self.__saldo += valor_deposito
                 print(f'\nDEPÓSITO EFETUADO COM SUCESSO!\n'
                       f'SALDO: R${self.__saldo:.2f}\n')
-                os.system('pause')
             else:
                 print(erro_cor('ERRO! Valores negativos não é válido para depósito\n'))
-                os.system('pause')
         except ValueError:
-            print(erro_cor('\nERRO! Valor de depósito inválido\n'))
-            os.system('pause')
+            print(erro_cor('ERRO! Valor de depósito inválido\n'))
 
     def sacar(self):
         try:
@@ -37,13 +35,21 @@ class Banco:
                 self.__saldo -= valor_saque if valor_saque > 0 else (-valor_saque)  # TODO: vê melhor forma de converter
                 print(f'\nSAQUE EFETUADO COM SUCESSO!\n'
                       f'SALDO: R${self.__saldo:.2f}\n')
-                os.system('pause')
             else:
                 print(erro_cor('ERRO! Saldo insuficiente\n'))
-                os.system('pause')
         except ValueError:
-            print(erro_cor('ERRO! Valor de saque inválido'))
-            os.system('pause')
+            print(erro_cor('ERRO! Valor de saque inválido\n'))
+
+    def check_pass(self):
+        try:
+            senha_entrada = int(input('Digite a senha: '))
+            if senha_entrada == self.__senha:
+                return True
+            else:
+                print(erro_cor('Senha incorreta\n'))
+        except ValueError:
+            print(erro_cor('Senha incorreta\n'))
+        os.system('pause')
 
 
 contas_clientes = {}
@@ -52,7 +58,7 @@ while True:
     match menu('ABRIR CONTA', 'ACESSAR CONTA', 'ENCERRAR SESSÃO'):
 
         case 3:
-            print('\nObrigado por escolher o Dalla$ Bank')
+            print('\nObrigado por escolher o Dalla$$ Bank')
             break
 
         case 1:
@@ -60,9 +66,10 @@ while True:
 
             nome_cliente = verify_name('Nome do Cliente: ')
             cpf_cliente = verify_cpf('CPF do Cliente: ')
+            senha_cliente = verify_pass('Senha de 4 dígitos: ')
             num_conta = str(choice(range(1000, 9999)))
             deposito_inicial = verify_num('Valor de Depósito: R$')
-            contas_clientes[num_conta] = Banco(nome_cliente, cpf_cliente, num_conta, deposito_inicial)
+            contas_clientes[num_conta] = Banco(nome_cliente, cpf_cliente, senha_cliente, num_conta, deposito_inicial)
 
             print(f'\n|> CONTA CRIADA COM SUCESSO!\n'
                   f'CLIENTE: {nome_cliente}    CPF: {cpf_cliente}   CONTA: {num_conta}\n'
@@ -73,19 +80,21 @@ while True:
             buscar = input('Número da Conta: ')
             os.system('cls')
 
-            while True:
-                try:
-                    contas_clientes[buscar].info_cliente()
-                except KeyError:
-                    print(erro_cor('ERRO! Desculpe, conta não encontrada\n'))
-                    os.system('pause')
-                    break
-                else:
-                    match menu('SACAR', 'DEPOSITAR', 'SAIR DA CONTA'):
-                        case 3:
-                            break
-                        case 1:
-                            os.system('cls')
-                            contas_clientes[buscar].sacar()
-                        case 2:
-                            os.system('cls'), contas_clientes[buscar].depositar()
+            try:
+                if contas_clientes[buscar].check_pass():
+                    while True:
+                        contas_clientes[buscar].info_cliente()
+                        match menu('SACAR', 'DEPOSITAR', 'SAIR DA CONTA'):
+                            case 3:
+                                break
+                            case 1:
+                                os.system('cls')
+                                contas_clientes[buscar].sacar()
+                                os.system('pause')
+                            case 2:
+                                os.system('cls')
+                                contas_clientes[buscar].depositar()
+                                os.system('pause')
+            except KeyError:
+                print(erro_cor('ERRO! Desculpe, conta não encontrada\n'))
+                os.system('pause')

@@ -3,7 +3,7 @@ def menu(*options):
     print(f'|{"<<< Dalla$$ Bank >>>":=^30}|')
     print(f'+{"-" * 30}+')
     for n, opt in enumerate(options):
-        print(f'|{f" {n+1} - {opt}":30}|')
+        print(f'|{f" [{n+1}] - {opt}":30}|')
     print(f'+{"=" * 30}+')
 
     while True:
@@ -33,7 +33,7 @@ def verify_cpf(texto: str) -> str:
         cpf_entrada = input(texto).replace('.', '').replace('-', '').replace(' ', '')
 
         if len(cpf_entrada) != 11 or not cpf_entrada.isdigit():
-            print(erro_cor('\nCPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)'))
+            print(erro_cor(erro_cor('\nCPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)')))
         else:
             cpf = f'{cpf_entrada[:3]}.{cpf_entrada[3:6]}.{cpf_entrada[6:9]}-{cpf_entrada[9:]}'
             return cpf
@@ -52,7 +52,7 @@ def verify_name(txt: str) -> str:
     while True:
         name = input('Nome: ').strip()
         if not name.replace(' ', '').isalpha():
-            print('\nERRO! Nome inválido\n')
+            print(erro_cor('\nERRO! Nome inválido\n'))
         else:
             return name.title()
 
@@ -69,13 +69,34 @@ def verify_num(txt: str) -> float:
 
     while True:
         try:
-            valor = float(input('Valor: '))
+            valor = float(input(txt))
             if valor < 100:
-                print('ERRO! O depósito mínimo é de R$100,00\n')
+                print(erro_cor('ERRO! O depósito mínimo é de R$100,00\n'))
                 continue
             return valor
         except ValueError:
-            print('ERRO! Valor inserido inválido\n')
+            print(erro_cor('ERRO! Valor inserido inválido\n'))
+
+
+def verify_pass(txt: str) -> int:
+    """ Tratamento de entrada de senhas
+
+    Args:
+        txt (str): Texto exibido ao usuário
+
+    Returns:
+        int.: Retorna a senha
+    """
+
+    while True:
+        try:
+            senha = int(input(txt))
+            if len(str(senha)) != 4:
+                print(erro_cor('ERRO! A senha deve conter exatos 4 dígitos\n'))
+                continue
+            return senha
+        except ValueError:
+            print(erro_cor('ERRO! A senha deve conter apenas dígitos\n'))
 
 
 if __name__ == '__main__':
