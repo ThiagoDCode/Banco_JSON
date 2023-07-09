@@ -1,5 +1,5 @@
 from random import choice
-from complementos import *
+from lib_def import *
 import os
 
 
@@ -58,17 +58,12 @@ while True:
         case 1:
             os.system('cls')
 
-            nome_cliente = input('Nome do Cliente: ').strip().title()
+            nome_cliente = verify_name('Nome do Cliente: ')
             cpf_cliente = verify_cpf('CPF do Cliente: ')
             num_conta = str(choice(range(1000, 9999)))
-            while True:
-                try:
-                    deposito_inicial = float(input('Valor de Depósito: R$'))
-                    break
-                except ValueError:
-                    print(erro_cor('\nERRO! Valor de depósito inválido'))
-
+            deposito_inicial = verify_num('Valor de Depósito: R$')
             contas_clientes[num_conta] = Banco(nome_cliente, cpf_cliente, num_conta, deposito_inicial)
+
             print(f'\n|> CONTA CRIADA COM SUCESSO! <|\n'
                   f'CLIENTE: {nome_cliente}    CPF: {cpf_cliente}   CONTA: {num_conta}\n'
                   f'DEPÓSITO: R${deposito_inicial:.2f}\n')
