@@ -19,5 +19,12 @@
         "senha": 4321,
         "conta": "9547",
         "saldo": 250.0
+    },
+    {
+        "cliente": "Carlos Alves",
+        "cpf": "654.236.856-98",
+        "senha": 4563,
+        "conta": "4519",
+        "saldo": 5000.0
     }
 ]

@@ -53,26 +53,27 @@ class Banco:
         os.system('pause')
 
 
-def acc_account(arquivo, dict_objects):
+def acc_account(arquivo):
     """ Re-instância os dados JSON na class Banco
 
     :param arquivo: Arquivo JSON
     :param dict_objects: Dict onde serão armazenados os Objetos
     :return: Retorna o Dict
     """
+    global contas_clientes
 
     with open(arquivo, 'r', encoding='UTF-8') as file:
         re_instance = json.load(file)
 
     for obj in re_instance:
-        dict_objects[obj['conta']] = Banco(
+        contas_clientes[obj['conta']] = Banco(
             obj['cliente'], obj['cpf'], obj['senha'], obj['conta'], obj['saldo']
         )
 
-    return dict_objects
+    return contas_clientes
 
 
-# Armazenará todos os Objetos da classe Banco
+# ARMAZENARÁ TODOS OS OBJETOS DA CLASSE BANCO
 contas_clientes = {}
 
 while True:
@@ -94,7 +95,7 @@ while True:
 
             contas_clientes[num_conta] = Banco(nome_cliente, cpf_cliente, senha_cliente, num_conta, deposito_inicial)
 
-            # Converte o Objeto em uma lista de dicionários e salva no JSON
+            # CONVERTE O OBJETO EM UMA LISTA DE DICIONÁRIOS E SALVA NO JSON
             contas = Banco(nome_cliente, cpf_cliente, senha_cliente, num_conta, deposito_inicial)
             save_dados('arquivos_banco.json', contas)
 
@@ -105,10 +106,10 @@ while True:
 
         case 2:
             os.system('cls')
+            # VAI FAZER O CARREGAMENTO DOS ARQUIVOS
+            acc_account('arquivos_banco.json')
+
             buscar = input('Número da Conta: ')
-
-            acc_account('arquivos_banco.json', contas_clientes)
-
             try:
                 if contas_clientes[buscar].check_pass():
                     while True:
