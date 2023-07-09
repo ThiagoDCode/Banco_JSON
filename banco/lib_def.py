@@ -1,6 +1,6 @@
 def menu(*options):
     print(f'+{"=" * 30}+')
-    print(f'|{"MENU":^30}|')
+    print(f'|{"<<< Dalla$$ Bank >>>":=^30}|')
     print(f'+{"-" * 30}+')
     for n, opt in enumerate(options):
         print(f'|{f" {n+1} - {opt}":30}|')
@@ -70,6 +70,14 @@ def verify_num(txt: str) -> float:
     while True:
         try:
             valor = float(input('Valor: '))
+            if valor < 100:
+                print('ERRO! O depósito mínimo é de R$100,00\n')
+                continue
             return valor
         except ValueError:
-            print('\nERRO! Valor inserido inválido\n')
+            print('ERRO! Valor inserido inválido\n')
+
+
+if __name__ == '__main__':
+    deposito = verify_num('Valor: R$')
+    print(deposito)

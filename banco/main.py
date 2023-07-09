@@ -11,7 +11,7 @@ class Banco:
         self.__saldo = saldo
 
     def info_cliente(self):
-        print(f'\n|> INFORMAÇÕES DA CONTA <|\n'
+        print(f'\n{"<< DADOS DA CONTA >>":=^30}\n'
               f'CLIENTE: {self.__cliente}   CPF: {self.__cpf}   CONTA: {self.__conta}\n'
               f'SALDO: R${self.__saldo:.2f}')
 
@@ -64,7 +64,7 @@ while True:
             deposito_inicial = verify_num('Valor de Depósito: R$')
             contas_clientes[num_conta] = Banco(nome_cliente, cpf_cliente, num_conta, deposito_inicial)
 
-            print(f'\n|> CONTA CRIADA COM SUCESSO! <|\n'
+            print(f'\n|> CONTA CRIADA COM SUCESSO!\n'
                   f'CLIENTE: {nome_cliente}    CPF: {cpf_cliente}   CONTA: {num_conta}\n'
                   f'DEPÓSITO: R${deposito_inicial:.2f}\n')
             os.system('pause')
@@ -81,12 +81,11 @@ while True:
                     os.system('pause')
                     break
                 else:
-                    saque_deposito = menu('SACAR', 'DEPOSITAR', 'VOLTAR')
-
-                    if saque_deposito == 3:
-                        break
-                    elif saque_deposito == 1:
-                        os.system('cls')
-                        contas_clientes[buscar].sacar()
-                    elif saque_deposito == 2:
-                        os.system('cls'), contas_clientes[buscar].depositar()
+                    match menu('SACAR', 'DEPOSITAR', 'SAIR DA CONTA'):
+                        case 3:
+                            break
+                        case 1:
+                            os.system('cls')
+                            contas_clientes[buscar].sacar()
+                        case 2:
+                            os.system('cls'), contas_clientes[buscar].depositar()
