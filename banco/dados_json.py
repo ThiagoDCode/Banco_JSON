@@ -20,7 +20,7 @@ def save_dados(arquivo, dados):
             nova_entrada = json.load(file)
             file.close()
 
-        # Os dados posteriores serão adicionados como dicionários, a lista criada inicialmente
+        # Os dados posteriores serão adicionados como dicionários, na lista criada inicialmente
         nova_entrada.append(dados.__dict__)
         with open(arquivo, 'w', encoding='UTF-8') as save:
             save.write(json.dumps(nova_entrada, ensure_ascii=False, indent=4))

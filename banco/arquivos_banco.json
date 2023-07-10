@@ -1,5 +1,12 @@
 [
     {
+        "cliente": "Maria José",
+        "cpf": "654.963.147-85",
+        "senha": 9658,
+        "conta": "1887",
+        "saldo": 9300.0
+    },
+    {
         "cliente": "Thiago Almeida",
         "cpf": "123.654.789-98",
         "senha": 1234,
