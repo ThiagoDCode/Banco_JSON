@@ -1,92 +1,7 @@
 from random import choice
-from lib_def import *
+from dados_json import *
 import os
-import json
 from time import sleep
-
-
-class Banco:
-    def __init__(self, cliente, cpf, senha, conta, saldo):
-        self.cliente = cliente
-        self.cpf = cpf
-        self.senha = senha
-        self.conta = conta
-        self.saldo = saldo
-
-    def info_cliente(self):
-        print(f'\n{"<< DADOS DA CONTA >>":=^30}\n'
-              f'CLIENTE: {self.cliente}   CPF: {self.cpf}   CONTA: {self.conta}\n'
-              f'SALDO: R${self.saldo:.2f}')
-
-    def depositar(self):
-        try:
-            valor_deposito = float(input('Valor do depósito: R$'))
-            if valor_deposito > 0:
-                self.saldo += valor_deposito
-                print(f'\nDEPÓSITO EFETUADO COM SUCESSO!\n'
-                      f'SALDO: R${self.saldo:.2f}\n')
-            else:
-                print(erro_cor('ERRO! Valores negativos não é válido para depósito\n'))
-        except ValueError:
-            print(erro_cor('ERRO! Valor de depósito inválido\n'))
-
-    def sacar(self):
-        try:
-            valor_saque = float(input('Valor do saque: R$'))
-            if valor_saque <= self.saldo:
-                self.saldo -= valor_saque if valor_saque > 0 else (-valor_saque)  # TODO: vê melhor forma de converter
-                print(f'\nSAQUE EFETUADO COM SUCESSO!\n'
-                      f'SALDO: R${self.saldo:.2f}\n')
-            else:
-                print(erro_cor('ERRO! Saldo insuficiente\n'))
-        except ValueError:
-            print(erro_cor('ERRO! Valor de saque inválido\n'))
-
-    def check_pass(self):
-        try:
-            senha_entrada = int(input('Digite a senha: '))
-            if senha_entrada == self.senha:
-                return True
-            else:
-                print(erro_cor('Senha incorreta\n'))
-        except ValueError:
-            print(erro_cor('Senha incorreta\n'))
-        os.system('pause')
-
-
-def acc_account(arquivo):
-    """ Re-instância os dados JSON na class Banco
-
-    :param arquivo: Arquivo JSON
-    :param dict_objects: Dict onde serão armazenados os Objetos
-    :return: Retorna o Dict
-    """
-    global contas_clientes
-
-    with open(arquivo, 'r', encoding='UTF-8') as file:
-        re_instance = json.load(file)
-
-    for obj in re_instance:
-        contas_clientes[obj['conta']] = Banco(
-            obj['cliente'], obj['cpf'], obj['senha'], obj['conta'], obj['saldo']
-        )
-
-    return contas_clientes
-
-
-def save_changes(arquivo):
-    """ Salva modificações feitas no Objeto no arquivo JSON
-
-    Args:
-        arquivo (_type_): Arquivo JSON
-    """
-    
-    update = []
-    for cliente in contas_clientes.keys():
-        update.append(contas_clientes[cliente].__dict__)
-
-    with open(arquivo, 'w', encoding='UTF-8') as save:
-        save.write(json.dumps(update, ensure_ascii=False, indent=4))
 
 
 # ARMAZENARÁ TODOS OS OBJETOS DA CLASSE BANCO
@@ -123,7 +38,7 @@ while True:
         case 2:
             os.system('cls')
             # VAI FAZER O CARREGAMENTO DOS ARQUIVOS
-            acc_account('arquivos_banco.json')
+            acc_account('arquivos_banco.json', contas_clientes)
 
             buscar = input('Número da Conta: ')
             try:
@@ -132,7 +47,7 @@ while True:
                         contas_clientes[buscar].info_cliente()
                         match menu('SACAR', 'DEPOSITAR', 'SAIR DA CONTA'):
                             case 3:
-                                save_changes('arquivos_banco.json')
+                                save_changes('arquivos_banco.json', contas_clientes)
                                 print('\n>>> SAINDO DA CONTA...')
                                 sleep(3)
                                 break

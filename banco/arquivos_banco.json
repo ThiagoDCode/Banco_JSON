@@ -4,7 +4,7 @@
         "cpf": "123.654.789-98",
         "senha": 1234,
         "conta": "6281",
-        "saldo": 1100.0
+        "saldo": 1000.0
     },
     {
         "cliente": "Nielly",
@@ -18,7 +18,7 @@
         "cpf": "987.985.645-52",
         "senha": 4321,
         "conta": "9547",
-        "saldo": 250.0
+        "saldo": 330.0
     },
     {
         "cliente": "Carlos Alves",

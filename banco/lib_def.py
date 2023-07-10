@@ -1,6 +1,3 @@
-import os
-import json
-
 
 def menu(*options):
     print(f'+{"=" * 30}+')
@@ -54,7 +51,7 @@ def verify_name(txt: str) -> str:
     """
 
     while True:
-        name = input('Nome: ').strip()
+        name = input(txt).strip()
         if not name.replace(' ', '').isalpha():
             print(erro_cor('\nERRO! Nome inválido\n'))
         else:
@@ -101,29 +98,6 @@ def verify_pass(txt: str) -> int:
             return senha
         except ValueError:
             print(erro_cor('ERRO! A senha deve conter apenas dígitos\n'))
-
-
-def save_dados(arquivo, dados):
-    """ Converte o Objeto e uma lista de dicionários e os salva em arquivo JSON
-
-    :param arquivo: Nome do arquivo de dados
-    :param dados: Objeto que será convertido e salvo
-    """
-
-    if not os.path.exists(arquivo):
-        # O primeiro dado será salvo como uma lista de dicionários (por isso: [.__dict__])
-        dados_iniciais = [dados.__dict__]
-        with open(arquivo, 'w', encoding='UTF-8') as save:
-            save.write(json.dumps(dados_iniciais, ensure_ascii=False, indent=4))
-    else:
-        with open(arquivo, 'r', encoding='UTF-8') as file:
-            nova_entrada = json.load(file)
-            file.close()
-
-        # Os dados posteriores serão adicionados como dicionários, a lista criada inicialmente
-        nova_entrada.append(dados.__dict__)
-        with open(arquivo, 'w', encoding='UTF-8') as save:
-            save.write(json.dumps(nova_entrada, ensure_ascii=False, indent=4))
 
 
 if __name__ == '__main__':
