@@ -1,10 +1,11 @@
 from random import choice
 from dados_json import *
+from lib_def import *
 import os
 from time import sleep
 
 
-# ARMAZENARÁ TODOS OS OBJETOS DA CLASSE BANCO
+# Armazena todos os objetos da classe Banco
 contas_clientes = {}
 
 while True:
@@ -19,28 +20,22 @@ while True:
             os.system('cls')
 
             # TODO: Criar uma interrupção "Esc" caso usuário queira não mas prosseguir com o cadastro
-            nome_cliente = verify_name('Nome do Cliente: ')
+            nome_cliente = name_check('Nome do Cliente: ')
             cpf_cliente = verify_cpf('CPF do Cliente: ')
             senha_cliente = verify_pass('Senha de 4 dígitos: ')
             num_conta = str(choice(range(1000, 9999)))
             deposito_inicial = verify_num('Valor de Depósito: R$')
 
             conta = Banco(nome_cliente, cpf_cliente, senha_cliente, num_conta, deposito_inicial)
-            # CONVERTE O OBJETO EM UMA LISTA DE DICIONÁRIOS E SALVA NO JSON
+            # Converte o Objeto em uma Lista de Dicionários e salva no JSON
             save_dados('arquivos_banco.json', conta)
-
             contas_clientes[num_conta] = conta
-
-            # TODO: Colocar esse print no 'save_dados()', junto com uma verificação de arquivo salvo
-            print(f'\n|> CONTA CRIADA COM SUCESSO!\n'
-                  f'CLIENTE: {nome_cliente}    CPF: {cpf_cliente}   CONTA: {num_conta}\n'
-                  f'DEPÓSITO: R${deposito_inicial:.2f}\n')
-            os.system('pause')
 
         case 2:
             os.system('cls')
-            # VAI FAZER O CARREGAMENTO DOS ARQUIVOS
-            acc_account('arquivos_banco.json', contas_clientes)
+            # Faz o carregamento dos arquivos
+            if not acc_account('arquivos_banco.json', contas_clientes):
+                continue
 
             buscar = input('Número da Conta: ')
             try:

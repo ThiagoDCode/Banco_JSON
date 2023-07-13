@@ -1,37 +1,64 @@
 [
     {
-        "cliente": "Maria José",
-        "cpf": "654.963.147-85",
-        "senha": 9658,
-        "conta": "1887",
-        "saldo": 9300.0
-    },
-    {
-        "cliente": "Thiago Almeida",
-        "cpf": "123.654.789-98",
-        "senha": 1234,
-        "conta": "6281",
-        "saldo": 1000.0
-    },
-    {
-        "cliente": "Nielly",
-        "cpf": "654.789.852-98",
-        "senha": 1000,
-        "conta": "8389",
-        "saldo": 350.0
-    },
-    {
-        "cliente": "Dallas",
-        "cpf": "987.985.645-52",
+        "cliente": [
+            "THIAGO",
+            "ALMEIDA",
+            "DA",
+            "SILVA"
+        ],
+        "cpf": "854.987.546-98",
         "senha": 4321,
-        "conta": "9547",
-        "saldo": 330.0
+        "conta": "9158",
+        "saldo": 600.0
     },
     {
-        "cliente": "Carlos Alves",
-        "cpf": "654.236.856-98",
-        "senha": 4563,
-        "conta": "4519",
-        "saldo": 3000.0
+        "cliente": [
+            "MARIA",
+            "JOSÉ",
+            "DA",
+            "SILVA"
+        ],
+        "cpf": "654.852.365-98",
+        "senha": 1234,
+        "conta": "1560",
+        "saldo": 8000.0
+    },
+    {
+        "cliente": [
+            "DALLAS",
+            "DE",
+            "ALCANTARÁ"
+        ],
+        "cpf": "745.652.985-52",
+        "senha": 6542,
+        "conta": "6859",
+        "saldo": 150.0
+    },
+    {
+        "cliente": [
+            "NIELLY"
+        ],
+        "cpf": "654.856.321-45",
+        "senha": 4689,
+        "conta": "7917",
+        "saldo": 500.0
+    },
+    {
+        "cliente": [
+            "DALLASS"
+        ],
+        "cpf": "789.654.123-52",
+        "senha": 4568,
+        "conta": "2967",
+        "saldo": 1550.0
+    },
+    {
+        "cliente": [
+            "DALLASASA"
+        ],
+        "cpf": "123.654.789-85",
+        "senha": 1234,
+        "conta": "7625",
+        "saldo": 500.0
     }
 ]

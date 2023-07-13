@@ -40,22 +40,33 @@ def verify_cpf(texto: str) -> str:
             return cpf
 
 
-def verify_name(txt: str) -> str:
-    """ Tratamento de entrada de nome
+# def verify_name(txt: str) -> str:
+#     """ Tratamento de entrada de nome
+#
+#     Args:
+#         txt (str): Texto exibido ao usuário
+#
+#     Returns:
+#         str: Retorna o nome formatado
+#     """
+#     while True:
+#         name = input(txt).strip()
+#         if not name.replace(' ', '').isalpha():
+#             print(erro_cor('\nERRO! Nome inválido\n'))
+#         else:
+#             return name.title()
 
-    Args:
-        txt (str): Texto exibido ao usuário
 
-    Returns:
-        str: Retorna o nome formatado
-    """
-
+def name_check(txt: str) -> list:
     while True:
-        name = input(txt).strip()
-        if not name.replace(' ', '').isalpha():
-            print(erro_cor('\nERRO! Nome inválido\n'))
+        name_entry = input(txt).strip().upper()
+
+        if not name_entry.replace(' ', '').isalpha():
+            print(erro_cor('\nERRO! Nome inválido'))
         else:
-            return name.title()
+            name_entry = name_entry.split(' ')
+
+            return remove_item(name_entry, ' ', '')
 
 
 def verify_num(txt: str) -> float:
@@ -100,5 +111,17 @@ def verify_pass(txt: str) -> int:
             print(erro_cor('ERRO! A senha deve conter apenas dígitos\n'))
 
 
-if __name__ == '__main__':
-    print()
+def remove_item(my_list: list, *args) -> list:
+    """ Remove todos os elementos de uma lista passados como argumentos
+
+    :param my_list: Lista principal
+    :param args: Elementos que deverão ser removidos da lista principal
+    :return: Retorna a lista principal com os elementos removidos
+    """
+    remove = list(args)
+
+    for item in remove:
+        while item in my_list:
+            my_list.remove(item)
+
+    return my_list
