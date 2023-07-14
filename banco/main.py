@@ -21,6 +21,8 @@ while True:
 
             # TODO: Criar uma interrupção "Esc" caso usuário queira não mas prosseguir com o cadastro
             nome_cliente = name_check('Nome do Cliente: ')
+            if not nome_cliente:
+                continue
             cpf_cliente = verify_cpf('CPF do Cliente: ')
             senha_cliente = verify_pass('Senha de 4 dígitos: ')
             num_conta = str(choice(range(1000, 9999)))

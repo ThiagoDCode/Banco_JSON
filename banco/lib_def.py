@@ -40,9 +40,11 @@ def verify_cpf(texto: str) -> str:
             return cpf
 
 
-def name_check(txt: str) -> list:
+def name_check(txt: str):
     while True:
         name_entry = input(txt).strip().upper()
+        if name_entry == '':
+            return False
 
         if not name_entry.replace(' ', '').isalpha():
             print(erro_cor('\nERRO! Nome inválido'))

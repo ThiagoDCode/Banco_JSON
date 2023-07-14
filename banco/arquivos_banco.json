@@ -1,6 +1,18 @@
 [
     {
         "cliente": [
+            "GGRAI",
+            "TWITCH",
+            "DA",
+            "TV"
+        ],
+        "cpf": "985.632.145-85",
+        "senha": 1234,
+        "conta": "8035",
+        "saldo": 500.0
+    },
+    {
+        "cliente": [
             "THIAGO",
             "ALMEIDA",
             "DA",
