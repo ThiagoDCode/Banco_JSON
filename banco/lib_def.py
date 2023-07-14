@@ -40,23 +40,6 @@ def verify_cpf(texto: str) -> str:
             return cpf
 
 
-# def verify_name(txt: str) -> str:
-#     """ Tratamento de entrada de nome
-#
-#     Args:
-#         txt (str): Texto exibido ao usuário
-#
-#     Returns:
-#         str: Retorna o nome formatado
-#     """
-#     while True:
-#         name = input(txt).strip()
-#         if not name.replace(' ', '').isalpha():
-#             print(erro_cor('\nERRO! Nome inválido\n'))
-#         else:
-#             return name.title()
-
-
 def name_check(txt: str) -> list:
     while True:
         name_entry = input(txt).strip().upper()
@@ -125,3 +108,20 @@ def remove_item(my_list: list, *args) -> list:
             my_list.remove(item)
 
     return my_list
+
+
+def cor(cor=0, txt=''):
+    """ Colore uma string.
+
+    :param cor: Número da cor
+    :param txt: String que será colorida
+    :return: Retorna a string colorida
+    """
+    cores = {
+        0: '\033[m',     # Neutro
+        1: '\033[34m',   # Azul
+        2: '\033[32m',   # Verde
+        3: '\033[93m',   # Amarelo
+    }
+
+    return cores[cor] + str(txt) + cores[0]

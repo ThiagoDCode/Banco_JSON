@@ -38,6 +38,8 @@ while True:
                 continue
 
             buscar = input('Número da Conta: ')
+            if buscar == '':
+                continue
             try:
                 if contas_clientes[buscar].check_pass():
                     while True:

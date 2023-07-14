@@ -11,9 +11,14 @@ class Banco:
         self.saldo = saldo
 
     def info_cliente(self):
-        print(f'\n{"<< DADOS DA CONTA >>":=^30}\n'
-              f'CLIENTE: {self.cliente}   CPF: {self.cpf}   CONTA: {self.conta}\n'
-              f'SALDO: R${self.saldo:.2f}')
+        os.system('cls')
+
+        nome = f'{self.cliente[0]} {self.cliente[1]}' if 'DE' != self.cliente[1] != 'DA' else self.cliente[0]
+
+        print(f'<< INFORMAÇÕES DA CONTA >>'.center(32, '='))
+        print(f'Olá, {cor(1, nome.title())}'
+              f'\nCPF: {cor(1, self.cpf)}  Conta: {cor(1, self.conta)}'
+              f'\nSaldo: {cor(1, f"{self.saldo:.2f}")}\n')
 
     def depositar(self):
         try:
