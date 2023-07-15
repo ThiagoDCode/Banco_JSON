@@ -1,6 +1,6 @@
-from random import choice
 from dados_json import *
-from lib_def import *
+from extras import *
+import check_lib as ck
 import os
 from time import sleep
 
@@ -24,13 +24,13 @@ while True:
         case 1:
             os.system('cls')
 
-            nome_cliente = name_check('Nome do Cliente: ')
+            nome_cliente = ck.name_check('Nome do Cliente: ')
             if not nome_cliente:
                 continue
-            cpf_cliente = verify_cpf('CPF do Cliente: ')
-            senha_cliente = verify_pass('Senha de 4 dígitos: ')
+            cpf_cliente = ck.verify_cpf('CPF do Cliente: ')
+            senha_cliente = ck.verify_pass('Senha de 4 dígitos: ')
             num_conta = create_acc(contas_clientes)
-            deposito_inicial = verify_num('Valor de Depósito: R$')
+            deposito_inicial = ck.verify_num('Valor de Depósito: R$')
 
             conta = Banco(nome_cliente, cpf_cliente, senha_cliente, num_conta, deposito_inicial)
             # Converte o Objeto em uma Lista de Dicionários e salva no JSON
@@ -69,5 +69,5 @@ while True:
 
                         os.system('pause')
             except KeyError:
-                print(erro_cor('ERRO! Desculpe, conta não encontrada\n'))
+                print(error('ERRO! Desculpe, conta não encontrada\n'))
                 os.system('pause')

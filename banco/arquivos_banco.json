@@ -83,5 +83,48 @@
         "senha": 1234,
         "conta": "5744",
         "saldo": 110.0
+    },
+    {
+        "cliente": [
+            "TESTE",
+            "DE",
+            "CPF"
+        ],
+        "cpf": "123.456.789-96",
+        "senha": 1234,
+        "conta": "1976",
+        "saldo": 5454.0
+    },
+    {
+        "cliente": [
+            "DALLAS",
+            "CODE",
+            "DE",
+            "TESTES"
+        ],
+        "cpf": "123.456.789-85",
+        "senha": 1234,
+        "conta": "5326",
+        "saldo": 255.0
+    },
+    {
+        "cliente": [
+            "DALLAS",
+            "CODE"
+        ],
+        "cpf": "123.654.789-85",
+        "senha": 1234,
+        "conta": "7922",
+        "saldo": 989.0
+    },
+    {
+        "cliente": [
+            "CODE",
+            "TESTE"
+        ],
+        "cpf": "123.654.789-85",
+        "senha": 1234,
+        "conta": "9445",
+        "saldo": 654.0
     }
 ]

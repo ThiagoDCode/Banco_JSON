@@ -26,7 +26,7 @@ def save_dados(arquivo, dados):
             with open(arquivo, 'w', encoding='UTF-8') as save:
                 save.write(json.dumps(nova_entrada, ensure_ascii=False, indent=4))
     except:
-        print(erro_cor('\nERRO! Ocorreu um problema no acesso ao banco de dados'))
+        print(error('\nERRO! Ocorreu um problema no acesso ao banco de dados'))
         os.system('pause')
     else:
         print('\n=====<< CONTA CRIADA COM SUCESSO! >>=====')
@@ -50,7 +50,7 @@ def acc_account(arquivo, dict_objetos):
                 obj['cliente'], obj['cpf'], obj['senha'], obj['conta'], obj['saldo']
             )
     except FileNotFoundError:
-        print(erro_cor('ERRO! Arquivo de dados não encontrado\n'))
+        print(error('ERRO! Arquivo de dados não encontrado\n'))
         os.system('pause')
         return False
     else:

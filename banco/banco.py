@@ -1,4 +1,4 @@
-from lib_def import *
+from extras import *
 from random import choice
 import os
 
@@ -35,9 +35,9 @@ class Banco:
                 print(f'\nDEPÓSITO EFETUADO COM SUCESSO!\n'
                       f'SALDO: R${self.saldo:.2f}\n')
             else:
-                print(erro_cor('ERRO! Valores negativos não é válido para depósito\n'))
+                print(error('ERRO! Valores negativos não é válido para depósito\n'))
         except ValueError:
-            print(erro_cor('ERRO! Valor de depósito inválido\n'))
+            print(error('ERRO! Valor de depósito inválido\n'))
 
     def sacar(self):
         try:
@@ -47,9 +47,9 @@ class Banco:
                 print(f'\nSAQUE EFETUADO COM SUCESSO!\n'
                       f'SALDO: R${self.saldo:.2f}\n')
             else:
-                print(erro_cor('ERRO! Saldo insuficiente\n'))
+                print(error('ERRO! Saldo insuficiente\n'))
         except ValueError:
-            print(erro_cor('ERRO! Valor de saque inválido\n'))
+            print(error('ERRO! Valor de saque inválido\n'))
 
     def check_pass(self):
         try:
@@ -57,9 +57,9 @@ class Banco:
             if senha_entrada == self.senha:
                 return True
             else:
-                print(erro_cor('Senha incorreta\n'))
+                print(error('Senha incorreta\n'))
         except ValueError:
-            print(erro_cor('Senha incorreta\n'))
+            print(error('Senha incorreta\n'))
         os.system('pause')
 
 
