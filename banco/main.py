@@ -8,6 +8,11 @@ from time import sleep
 # Armazena todos os objetos da classe Banco
 contas_clientes = {}
 
+# Recupera e re-instância os Objetos (se existir), assim que o programa é rodado
+if os.path.exists('arquivos_banco.json'):
+    acc_account('arquivos_banco.json', contas_clientes)
+
+
 while True:
     os.system('cls')
     match menu('ABRIR CONTA', 'ACESSAR CONTA', 'ENCERRAR SESSÃO'):
@@ -19,13 +24,12 @@ while True:
         case 1:
             os.system('cls')
 
-            # TODO: Criar uma interrupção "Esc" caso usuário queira não mas prosseguir com o cadastro
             nome_cliente = name_check('Nome do Cliente: ')
             if not nome_cliente:
                 continue
             cpf_cliente = verify_cpf('CPF do Cliente: ')
             senha_cliente = verify_pass('Senha de 4 dígitos: ')
-            num_conta = str(choice(range(1000, 9999)))
+            num_conta = create_acc(contas_clientes)
             deposito_inicial = verify_num('Valor de Depósito: R$')
 
             conta = Banco(nome_cliente, cpf_cliente, senha_cliente, num_conta, deposito_inicial)
@@ -47,18 +51,22 @@ while True:
                     while True:
                         contas_clientes[buscar].info_cliente()
                         match menu('SACAR', 'DEPOSITAR', 'SAIR DA CONTA'):
+
                             case 3:
                                 os.system('cls')
                                 save_changes('arquivos_banco.json', contas_clientes)
                                 print('\n>>> SAINDO DA CONTA...')
                                 sleep(3)
                                 break
+
                             case 1:
                                 os.system('cls')
                                 contas_clientes[buscar].sacar()
+
                             case 2:
                                 os.system('cls')
                                 contas_clientes[buscar].depositar()
+
                         os.system('pause')
             except KeyError:
                 print(erro_cor('ERRO! Desculpe, conta não encontrada\n'))

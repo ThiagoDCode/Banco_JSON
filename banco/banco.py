@@ -1,4 +1,5 @@
 from lib_def import *
+from random import choice
 import os
 
 
@@ -13,12 +14,18 @@ class Banco:
     def info_cliente(self):
         os.system('cls')
 
-        nome = f'{self.cliente[0]} {self.cliente[1]}' if 'DE' != self.cliente[1] != 'DA' else self.cliente[0]
+        name_exclusions = ['DA', 'DAS', 'DE', 'DO', 'DOS']
+        if self.cliente[1] not in name_exclusions:
+            name = f'{self.cliente[0]} {self.cliente[1]}'
+        else:
+            name = self.cliente[0]
 
+        # PRINT ------------------------------------------------------------------------
         print(f'<< INFORMAÇÕES DA CONTA >>'.center(32, '='))
-        print(f'Olá, {cor(1, nome.title())}'
+        print(f'Olá, {cor(1, name.title())}'
               f'\nCPF: {cor(1, self.cpf)}  Conta: {cor(1, self.conta)}'
               f'\nSaldo: {cor(1, f"{self.saldo:.2f}")}\n')
+        # ------------------------------------------------------------------------ PRINT
 
     def depositar(self):
         try:
@@ -54,3 +61,11 @@ class Banco:
         except ValueError:
             print(erro_cor('Senha incorreta\n'))
         os.system('pause')
+
+
+def create_acc(dict_objs):
+    while True:
+        acc = str(choice(range(1000, 10000)))
+
+        if not dict_objs.get(acc):
+            return acc

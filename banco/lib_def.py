@@ -63,7 +63,6 @@ def verify_num(txt: str) -> float:
     Returns:
         float: Retorna o valor
     """
-
     while True:
         try:
             valor = float(input(txt))
@@ -84,7 +83,6 @@ def verify_pass(txt: str) -> int:
     Returns:
         int.: Retorna a senha
     """
-
     while True:
         try:
             senha = int(input(txt))

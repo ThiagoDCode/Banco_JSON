@@ -72,5 +72,16 @@
         "senha": 1234,
         "conta": "7625",
         "saldo": 500.0
+    },
+    {
+        "cliente": [
+            "NICOLE",
+            "DOS",
+            "SANTOS"
+        ],
+        "cpf": "968.632.986-98",
+        "senha": 1234,
+        "conta": "5744",
+        "saldo": 110.0
     }
 ]
