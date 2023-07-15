@@ -1,19 +1,32 @@
 
-def menu(*options):
-    print(f'+{"=" * 30}+')
-    print(f'|{"<< Dalla$$ Bank >>":=^30}|')
-    print(f'+{"-" * 30}+')
+def menu(*options) -> int:
+    """ Usa os argumentos passados para criar um Menu dinamicamente
+
+        Args:
+            options: Opções do Menu
+
+        Raises:
+            Exception: Exibe erro caso entrada não corresponda ao range das opções
+
+        Returns:
+            Retorna o valor de entrada na resposta
+        """
+    tamanho = 30
+    # PRINT -------------------------------------------------------
+    print(f'+{"=" * tamanho}+ \n'
+          f'|{"DALLA$$ Bank":^{tamanho}}| \n'
+          f'+{"=" * tamanho}+')
     for n, opt in enumerate(options):
-        print(f'|{f" [{n+1}] - {opt}":30}|')
-    print(f'+{"=" * 30}+')
+        print(f'|{f" [{n + 1}] - {opt}":{tamanho}}!')
+    print(f'+{"=" * tamanho}+')
+    # ------------------------------------------------------- PRINT
 
     while True:
         try:
             resposta = int(input('|> '))
             if 0 < resposta <= len(options):
                 return resposta
-            else:
-                print(error('ERRO! Opção inválida, tente novamente...'))
+            raise Exception()
         except (ValueError, Exception):
             print(error('ERRO! Opção inválida, tente novamente...'))
 
