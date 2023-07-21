@@ -5,9 +5,6 @@ import os
 from time import sleep
 
 
-# Armazena todos os objetos da classe Banco
-contas_clientes = {}
-
 # Recupera e re-instância os Objetos (se existir), assim que o programa é rodado
 if os.path.exists('arquivos_banco.json'):
     acc_account('arquivos_banco.json', contas_clientes)
@@ -18,7 +15,7 @@ while True:
     match menu('ABRIR CONTA', 'ACESSAR CONTA', 'ENCERRAR SESSÃO'):
 
         case 3:
-            print('\nObrigado por escolher o Dalla$$ Bank\n')
+            print('\nObrigado por escolher o DALLA$$ Bank\n')
             break
 
         case 1:
@@ -31,14 +28,8 @@ while True:
             except Exception:
                 print(cor(3, '\nAbertura de Conta Cancelada\n'))
                 sleep(1.5)
-                # continue
             else:
-                num_conta = create_acc(contas_clientes)
-
-                conta = Banco(nome_cliente, cpf_cliente, senha_cliente, num_conta, deposito_inicial)
-                # Converte o Objeto em uma Lista de Dicionários e salva no JSON
-                save_dados('arquivos_banco.json', conta)
-                contas_clientes[num_conta] = conta
+                create_acc(nome_cliente, cpf_cliente, senha_cliente, deposito_inicial)
 
         case 2:
             os.system('cls')
@@ -51,9 +42,9 @@ while True:
                 if contas_clientes[buscar_conta].check_pass(buscar_senha):
                     while True:
                         contas_clientes[buscar_conta].info_cliente()
-                        match menu('SACAR', 'DEPOSITAR', 'SAIR DA CONTA'):
+                        match menu('SACAR', 'DEPOSITAR', 'TRANSFERIR', 'SAIR DA CONTA'):
 
-                            case 3:
+                            case 4:
                                 os.system('cls')
                                 save_changes('arquivos_banco.json', contas_clientes)
                                 print('\n>>> SAINDO DA CONTA...')
@@ -67,6 +58,15 @@ while True:
                             case 2:
                                 os.system('cls')
                                 contas_clientes[buscar_conta].depositar()
+
+                            case 3:
+                                os.system('cls')
+                                conta_destino = input('Número da Conta Destinatária: ')
+                                if contas_clientes.get(conta_destino):
+                                    contas_clientes[buscar_conta].transferir(contas_clientes[conta_destino])
+                                else:
+                                    print(error('ERRO! Conta destinatária não encontrada\n'))
+
                         os.system('pause')
             except (KeyError, Exception):
                 print(error('ERRO! Conta ou Senha inválida\n'))

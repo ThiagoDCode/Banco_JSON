@@ -1,8 +1,22 @@
 import check_lib as ck
 from banco import *
+from extras import *
 from time import sleep
 import json
 import os
+
+
+# Armazena todos os Objetos da Classe 'Banco'
+contas_clientes = {}
+
+
+def create_acc(nome, cpf, senha, deposito):
+    conta_validated = validate_acc(contas_clientes)
+
+    conta_cliente = Banco(nome, cpf, senha, conta_validated, deposito)
+    # Converte o Objeto em uma Lista de Dicionários e salva no JSON
+    save_dados('arquivos_banco.json', conta_cliente)
+    contas_clientes[conta_validated] = conta_cliente
 
 
 def save_dados(arquivo, dados):

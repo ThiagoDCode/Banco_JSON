@@ -1,5 +1,6 @@
 from extras import *
 from random import choice
+from time import sleep
 import os
 
 
@@ -60,10 +61,27 @@ class Banco:
             print(error('ERRO! A senha é formada por 4 dígitos, tente novamente...\n'))
         os.system('pause')
 
+    def transferir(self, conta_destino):
+        try:
+            valor_trans = float(input('Valor da Transferência: R$'))
+            if valor_trans <= self.saldo:
+                self.saldo -= valor_trans
+                conta_destino.saldo += valor_trans
+                print(cor(2, '\nTRANSFERÊNCIA REALIZADA COM SUCESSO!\n'))
+            else:
+                print(error('Saldo insuficiente!\n'))
+        except ValueError:
+            print(error('ERRO! Valor para transferência inválido\n'))
 
-def create_acc(dict_objs):
+
+def validate_acc(dict_objects: dict) -> str:
+    """ Define um número de conta único de 4 dígitos
+
+    :param dict_objects: Dicionário com os Objetos (Contas Clientes)
+    :return: Retorna a string com número da conta
+    """
     while True:
         acc = str(choice(range(1000, 10000)))
 
-        if not dict_objs.get(acc):
+        if not dict_objects.get(acc):
             return acc
