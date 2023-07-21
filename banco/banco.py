@@ -51,15 +51,13 @@ class Banco:
         except ValueError:
             print(error('ERRO! Valor de saque inválido\n'))
 
-    def check_pass(self):
+    def check_pass(self, senha):
         try:
-            senha_entrada = int(input('Digite a senha: '))
-            if senha_entrada == self.senha:
+            if int(senha) == self.senha:
                 return True
-            else:
-                print(error('Senha incorreta\n'))
+            raise Exception()
         except ValueError:
-            print(error('Senha incorreta\n'))
+            print(error('ERRO! A senha é formada por 4 dígitos, tente novamente...\n'))
         os.system('pause')
 
 

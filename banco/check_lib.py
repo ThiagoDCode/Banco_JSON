@@ -102,15 +102,3 @@ def remove_item(my_list: list, *args) -> list:
             my_list.remove(item)
 
     return my_list
-
-
-# def busca_cpf(dict_objects, cpf_busca):
-#     """ Verifica se o CPF informado já existe nos arquivos de dados.
-#
-#     :param dict_objects: Dicionário de Objetos (Com as contas dos Clientes do Banco)
-#     :param cpf_busca: CPF a ser buscado nos arquivos de dados
-#     :return: True, caso CPF seja encontrado nos arquivos de dados
-#     """
-#     for cliente in dict_objects.values():
-#         if cliente.cpf == cpf_busca:
-#             return True

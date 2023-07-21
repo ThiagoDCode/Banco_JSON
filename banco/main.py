@@ -39,17 +39,16 @@ while True:
 
         case 2:
             os.system('cls')
-            # Faz o carregamento dos arquivos
-            if not acc_account('arquivos_banco.json', contas_clientes):
-                continue
 
-            buscar = input('Número da Conta: ')
-            if buscar == '':
+            buscar_conta = input('Número da Conta: ')
+            if buscar_conta == '':
                 continue
+            buscar_senha = input('Digite a Senha: ')
+
             try:
-                if contas_clientes[buscar].check_pass():
+                if contas_clientes[buscar_conta].check_pass(buscar_senha):
                     while True:
-                        contas_clientes[buscar].info_cliente()
+                        contas_clientes[buscar_conta].info_cliente()
                         match menu('SACAR', 'DEPOSITAR', 'SAIR DA CONTA'):
 
                             case 3:
@@ -61,13 +60,13 @@ while True:
 
                             case 1:
                                 os.system('cls')
-                                contas_clientes[buscar].sacar()
+                                contas_clientes[buscar_conta].sacar()
 
                             case 2:
                                 os.system('cls')
-                                contas_clientes[buscar].depositar()
+                                contas_clientes[buscar_conta].depositar()
 
                         os.system('pause')
-            except KeyError:
-                print(error('ERRO! Desculpe, conta não encontrada\n'))
+            except (KeyError, Exception):
+                print(error('ERRO! Conta ou Senha inválida\n'))
                 os.system('pause')
