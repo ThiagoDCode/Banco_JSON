@@ -33,11 +33,11 @@ def save_dados(arquivo, dados):
         sleep(1.5)
 
 
-def acc_account(arquivo, dict_objetos):
+def acc_account(arquivo, dict_objects):
     """ Re-instância os dados JSON na class Banco
 
     :param arquivo: Arquivo JSON
-    :param dict_objetos: Dicionário onde será armazenado os objetos re-instanciados
+    :param dict_objects: Dicionário onde será armazenado os objetos re-instanciados
     :return: Retorna o Dict
     """
     try:
@@ -46,7 +46,7 @@ def acc_account(arquivo, dict_objetos):
             file.close()
 
         for obj in re_instance:
-            dict_objetos[obj['conta']] = Banco(
+            dict_objects[obj['conta']] = Banco(
                 obj['cliente'], obj['cpf'], obj['senha'], obj['conta'], obj['saldo']
             )
     except FileNotFoundError:
@@ -54,7 +54,7 @@ def acc_account(arquivo, dict_objetos):
         os.system('pause')
         return False
     else:
-        return dict_objetos
+        return dict_objects
 
 
 def save_changes(arquivo, dict_objetos):

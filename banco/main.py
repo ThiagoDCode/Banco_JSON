@@ -27,7 +27,7 @@ while True:
             nome_cliente = ck.name_check('Nome do Cliente: ')
             if not nome_cliente:
                 continue
-            cpf_cliente = ck.verify_cpf('CPF do Cliente: ')
+            cpf_cliente = ck.validate_cpf(contas_clientes)
             senha_cliente = ck.verify_pass('Senha de 4 dígitos: ')
             num_conta = create_acc(contas_clientes)
             deposito_inicial = ck.verify_num('Valor de Depósito: R$')

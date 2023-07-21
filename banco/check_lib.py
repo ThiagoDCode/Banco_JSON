@@ -15,21 +15,37 @@ def name_check(txt: str):
             return remove_item(name_entry, ' ', '')
 
 
-def verify_cpf(texto: str) -> str:
+def validate_cpf(dict_objects: dict) -> str:
     """ Verifica se o CPF contém 11 números e, converte o número para
     o padrão CPF do Brazil (ex: 000.000.000-00)
 
-    :param texto: Texto de exibição para o usuário
+    :param dict_objects: Dicionário de Objetos (Com as contas dos Clientes do Banco)
     :return: Retorna o número CPF (formato padrão)
     """
     while True:
-        cpf_entrada = input(texto).replace('.', '').replace('-', '').replace(' ', '')
+        cpf_entrada = input('CPF do Cliente: ').replace('.', '').replace('-', '').replace(' ', '')
 
         if len(cpf_entrada) != 11 or not cpf_entrada.isdigit():
-            print(ex.error('\nCPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)'))
+            print(ex.error('CPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)\n'))
+            continue
+
+        cpf = f'{cpf_entrada[:3]}.{cpf_entrada[3:6]}.{cpf_entrada[6:9]}-{cpf_entrada[9:]}'
+        if busca_cpf(dict_objects, cpf):
+            print(ex.error('ERRO! CPF já cadastrado\n'))
         else:
-            cpf = f'{cpf_entrada[:3]}.{cpf_entrada[3:6]}.{cpf_entrada[6:9]}-{cpf_entrada[9:]}'
             return cpf
+
+
+def busca_cpf(dict_objects: dict, cpf_busca: str) -> bool:
+    """ Verifica se o CPF informado já existe nos arquivos de dados.
+
+    :param dict_objects: Dicionário de Objetos (Com as contas dos Clientes do Banco)
+    :param cpf_busca: CPF a ser buscado nos arquivos de dados
+    :return: True, caso CPF seja encontrado nos arquivos de dados
+    """
+    for cliente in dict_objects.values():
+        if cliente.cpf == cpf_busca:
+            return True
 
 
 def verify_pass(txt: str) -> int:
@@ -86,3 +102,15 @@ def remove_item(my_list: list, *args) -> list:
             my_list.remove(item)
 
     return my_list
+
+
+# def busca_cpf(dict_objects, cpf_busca):
+#     """ Verifica se o CPF informado já existe nos arquivos de dados.
+#
+#     :param dict_objects: Dicionário de Objetos (Com as contas dos Clientes do Banco)
+#     :param cpf_busca: CPF a ser buscado nos arquivos de dados
+#     :return: True, caso CPF seja encontrado nos arquivos de dados
+#     """
+#     for cliente in dict_objects.values():
+#         if cliente.cpf == cpf_busca:
+#             return True
