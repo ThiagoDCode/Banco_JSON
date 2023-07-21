@@ -15,21 +15,26 @@ def name_check(txt: str):
             return remove_item(name_entry, ' ', '')
 
 
-def validate_cpf(dict_objects: dict) -> str:
+def validate_cpf(txt_user: str, dict_objects: dict, recover=False) -> str:
     """ Verifica se o CPF contém 11 números e, converte o número para
     o padrão CPF do Brazil (ex: 000.000.000-00)
 
+    :param txt_user: Texto exibido ao usuário
     :param dict_objects: Dicionário de Objetos (Com as contas dos Clientes do Banco)
-    :return: Retorna o número CPF (formato padrão)
+    :param recover: Se True, retorna apenas o CPF formatado
+    :return: Retorna o número CPF (verificado e formatado)
     """
     while True:
-        cpf_entrada = input('CPF do Cliente: ').replace('.', '').replace('-', '').replace(' ', '')
+        cpf_entrada = input(txt_user).replace('.', '').replace('-', '').replace(' ', '')
 
         if len(cpf_entrada) != 11 or not cpf_entrada.isdigit():
             print(ex.error('CPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)\n'))
             continue
 
         cpf = f'{cpf_entrada[:3]}.{cpf_entrada[3:6]}.{cpf_entrada[6:9]}-{cpf_entrada[9:]}'
+        if recover:
+            return cpf
+
         if busca_cpf(dict_objects, cpf):
             print(ex.error('ERRO! CPF já cadastrado\n'))
         else:

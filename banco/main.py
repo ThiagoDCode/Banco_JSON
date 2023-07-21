@@ -27,7 +27,7 @@ while True:
             nome_cliente = ck.name_check('Nome do Cliente: ')
             if not nome_cliente:
                 continue
-            cpf_cliente = ck.validate_cpf(contas_clientes)
+            cpf_cliente = ck.validate_cpf('CPF do Cliente', contas_clientes)
             senha_cliente = ck.verify_pass('Senha de 4 dígitos: ')
             num_conta = create_acc(contas_clientes)
             deposito_inicial = ck.verify_num('Valor de Depósito: R$')
@@ -69,4 +69,7 @@ while True:
                         os.system('pause')
             except (KeyError, Exception):
                 print(error('ERRO! Conta ou Senha inválida\n'))
-                os.system('pause')
+                if input('Esqueceu? Deseja recuperar Conta/Senha ("S")? ').strip().upper() == 'S':
+                    if recover('arquivos_banco.json', contas_clientes):
+                        print(cor(2, '\nDADOS ATUALIZADOS COM SUCESSO!\n'))
+                        sleep(1.5)

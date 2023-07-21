@@ -1,3 +1,4 @@
+import check_lib as ck
 from banco import *
 from time import sleep
 import json
@@ -70,3 +71,31 @@ def save_changes(arquivo, dict_objetos):
 
     with open(arquivo, 'w', encoding='UTF-8') as save:
         save.write(json.dumps(update, ensure_ascii=False, indent=4))
+
+
+def recover(arquivo, dict_objects):
+    os.system('cls')
+
+    while True:
+        cpf_busca = ck.validate_cpf('CPF da Conta: ', dict_objects, recover=True)
+        if cpf_busca == '':
+            break
+
+        for conta in dict_objects.values():
+            if conta.cpf == cpf_busca:
+                os.system('cls')
+                # PRINT --------------------------------------------------------------
+                print('=' * 35)
+                print(*conta.cliente)
+                print(f'CPF: {conta.cpf}   Conta: {conta.conta} \n'
+                      f'{"=" * 35}')
+                # -------------------------------------------------------------- PRINT
+
+                new_pass = ck.verify_pass('Digite a nova senha: ')
+                conta.senha = new_pass
+                save_changes(arquivo, dict_objects)
+                return True
+
+        print(error('ERRO! CPF não encontrado\n'))
+        os.system('pause')
+        break
