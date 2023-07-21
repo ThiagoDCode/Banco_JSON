@@ -5,7 +5,8 @@ def name_check(txt: str):
     while True:
         name_entry = input(txt).strip().upper()
         if name_entry == '':
-            return False
+            # return False
+            raise Exception()
 
         if not name_entry.replace(' ', '').isalpha():
             print(ex.error('\nERRO! Nome inválido'))
@@ -26,6 +27,8 @@ def validate_cpf(txt_user: str, dict_objects: dict, recover=False) -> str:
     """
     while True:
         cpf_entrada = input(txt_user).replace('.', '').replace('-', '').replace(' ', '')
+        if cpf_entrada == '':
+            raise Exception()
 
         if len(cpf_entrada) != 11 or not cpf_entrada.isdigit():
             print(ex.error('CPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)\n'))
@@ -53,43 +56,44 @@ def busca_cpf(dict_objects: dict, cpf_busca: str) -> bool:
             return True
 
 
-def verify_pass(txt: str) -> int:
+def verify_pass(txt_user: str) -> int:
     """ Tratamento de entrada de senhas
 
     Args:
-        txt (str): Texto exibido ao usuário
+        txt_user (str): Texto exibido ao usuário
 
     Returns:
         int.: Retorna a senha
     """
     while True:
-        try:
-            senha = int(input(txt))
-            if len(str(senha)) != 4:
-                print(ex.error('ERRO! A senha deve conter exatos 4 dígitos\n'))
-                continue
-            return senha
-        except ValueError:
-            print(ex.error('ERRO! A senha deve conter apenas dígitos\n'))
+        senha = input(txt_user)
+        if senha == '':
+            raise Exception()
+
+        if len(senha) == 4 and senha.isdigit():
+            return int(senha)
+        else:
+            print(ex.error('ERRO! A senha deve conter apenas e exatos 4 dígitos\n'))
 
 
-def verify_num(txt: str) -> float:
+def verify_num(txt_user: str) -> float:
     """ Tratamento de entrada de números INT/FLOAT
 
     Args:
-        txt (str): Texto exibido ao usuário
+        txt_user (str): Texto exibido ao usuário
 
     Returns:
         float: Retorna o valor
     """
     while True:
+        valor = input(txt_user)
+        if valor == '':
+            raise Exception()
+
         try:
-            valor = float(input(txt))
-            if valor < 100:
-                print(ex.error('O depósito mínimo é de R$100,00\n'))
-                continue
-            return valor
-        except ValueError:
+            if float(valor):
+                return float(valor)
+        except:
             print(ex.error('ERRO! Valor inserido inválido\n'))
 
 

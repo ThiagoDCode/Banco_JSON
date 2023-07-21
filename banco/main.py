@@ -18,28 +18,30 @@ while True:
     match menu('ABRIR CONTA', 'ACESSAR CONTA', 'ENCERRAR SESSÃO'):
 
         case 3:
-            print('\nObrigado por escolher o Dalla$$ Bank')
+            print('\nObrigado por escolher o Dalla$$ Bank\n')
             break
 
         case 1:
             os.system('cls')
+            try:
+                nome_cliente = ck.name_check('Nome do Cliente: ')
+                cpf_cliente = ck.validate_cpf('CPF do Cliente: ', contas_clientes)
+                senha_cliente = ck.verify_pass('Senha de 4 dígitos: ')
+                deposito_inicial = ck.verify_num('Valor de Depósito: R$')
+            except Exception:
+                print(cor(3, '\nAbertura de Conta Cancelada\n'))
+                sleep(1.5)
+                # continue
+            else:
+                num_conta = create_acc(contas_clientes)
 
-            nome_cliente = ck.name_check('Nome do Cliente: ')
-            if not nome_cliente:
-                continue
-            cpf_cliente = ck.validate_cpf('CPF do Cliente', contas_clientes)
-            senha_cliente = ck.verify_pass('Senha de 4 dígitos: ')
-            num_conta = create_acc(contas_clientes)
-            deposito_inicial = ck.verify_num('Valor de Depósito: R$')
-
-            conta = Banco(nome_cliente, cpf_cliente, senha_cliente, num_conta, deposito_inicial)
-            # Converte o Objeto em uma Lista de Dicionários e salva no JSON
-            save_dados('arquivos_banco.json', conta)
-            contas_clientes[num_conta] = conta
+                conta = Banco(nome_cliente, cpf_cliente, senha_cliente, num_conta, deposito_inicial)
+                # Converte o Objeto em uma Lista de Dicionários e salva no JSON
+                save_dados('arquivos_banco.json', conta)
+                contas_clientes[num_conta] = conta
 
         case 2:
             os.system('cls')
-
             buscar_conta = input('Número da Conta: ')
             if buscar_conta == '':
                 continue
@@ -65,7 +67,6 @@ while True:
                             case 2:
                                 os.system('cls')
                                 contas_clientes[buscar_conta].depositar()
-
                         os.system('pause')
             except (KeyError, Exception):
                 print(error('ERRO! Conta ou Senha inválida\n'))
