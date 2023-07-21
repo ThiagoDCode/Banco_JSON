@@ -1,6 +1,6 @@
 # **Sistema de Conta de Banco**
-### *by* Thiago {Dallas_</>}
+### *by* Thiago <lee.code>
 
 ----------------------------------------------
 
-**Sistema de Conta de Banco usando o SQLite como armazenamento dos dados.**
+**Sistema de Conta de Banco usando arquivo JSON como "armazenamento dos dados".**
