@@ -26,8 +26,7 @@ Repositório por [Thiago Almeida](https://github.com/ThiagoDCode)
 
 Contatos:
 
-[![E-mail](https://img.shields.io/static/v1?label=&message=E-mail&color=blueviolet&logoColor=white&logo=gmail)](thiago.lee.oficial@gmail.com "Enviar e-mail.")
-&emsp;
+[![E-mail](https://img.shields.io/static/v1?label=&message=E-mail&color=blueviolet&logoColor=white&logo=gmail)](mailto:thiago.lee.oficial@gmail.com "Enviar e-mail.")
 [![LinkedIn](https://img.shields.io/static/v1?label=&message=LinkedIn&color=blue&logoColor=white&logo=LinkedIn)](https://www.linkedin.com/in/thiago-almeida-dcode "Acessar.")
 
 ---
