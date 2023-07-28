@@ -40,7 +40,7 @@ def save_dados(arquivo, dados):
             nova_entrada.append(dados.__dict__)
             with open(arquivo, 'w', encoding='UTF-8') as save:
                 save.write(json.dumps(nova_entrada, ensure_ascii=False, indent=4))
-    except:
+    except FileNotFoundError:
         print(error('\nERRO! Ocorreu um problema no acesso ao banco de dados'))
         os.system('pause')
     else:

@@ -35,10 +35,10 @@ def error(txt):
     return '\033[1;31m' + txt + '\033[m'
 
 
-def cor(cor=0, txt=''):
+def cor(cor_txt=0, txt=''):
     """ Colore uma string.
 
-    :param cor: Número da cor
+    :param cor_txt: Número da cor
     :param txt: String que será colorida
     :return: Retorna a string colorida
     """
@@ -49,4 +49,4 @@ def cor(cor=0, txt=''):
         3: '\033[93m',   # Amarelo
     }
 
-    return cores[cor] + str(txt) + cores[0]
+    return cores[cor_txt] + str(txt) + cores[0]

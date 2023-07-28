@@ -93,7 +93,7 @@ def verify_num(txt_user: str) -> float:
         try:
             if float(valor):
                 return float(valor)
-        except:
+        except ValueError:
             print(ex.error('ERRO! Valor inserido inválido\n'))
 
 

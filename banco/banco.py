@@ -1,6 +1,5 @@
 from extras import *
 from random import choice
-from time import sleep
 import os
 
 
