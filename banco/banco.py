@@ -1,5 +1,4 @@
 from extras import *
-from random import choice
 import os
 
 
@@ -17,8 +16,8 @@ class Banco:
         # PRINT ------------------------------------------------------------------------
         print(f'<< INFORMAÇÕES DA CONTA >>'.center(32, '='))
         print(f'{cor(1, self.cliente)}'
-              f'\nCPF: {cor(1, self.cpf)}  Conta: {cor(1, self.conta)}'
-              f'\nSaldo: {cor(1, f"R${self.saldo:.2f}")}\n')
+            f'\nCPF: {cor(1, self.cpf)}  Conta: {cor(1, self.conta)}'
+            f'\nSaldo: {cor(1, f"R${self.saldo:.2f}")}\n')
         # ------------------------------------------------------------------------ PRINT
 
     def depositar(self):
@@ -27,7 +26,8 @@ class Banco:
             if valor_deposito > 0:
                 self.saldo += valor_deposito
                 print(f'\nDEPÓSITO EFETUADO COM SUCESSO!\n'
-                      f'SALDO: R${self.saldo:.2f}\n')
+                    f'SALDO: R${self.saldo:.2f}\n')
+           
             else:
                 print(erro('ERRO! Valores negativos não é válido para depósito\n'))
         except ValueError:
@@ -39,7 +39,8 @@ class Banco:
             if valor_saque <= self.saldo:
                 self.saldo -= valor_saque if valor_saque > 0 else (-valor_saque)  # TODO: vê melhor forma de converter
                 print(f'\nSAQUE EFETUADO COM SUCESSO!\n'
-                      f'SALDO: R${self.saldo:.2f}\n')
+                    f'SALDO: R${self.saldo:.2f}\n')
+            
             else:
                 print(erro('ERRO! Saldo insuficiente\n'))
         except ValueError:
@@ -50,6 +51,7 @@ class Banco:
             if int(senha) == self.senha:
                 return True
             raise Exception()
+        
         except ValueError:
             print(erro('ERRO! A senha é formada por 4 dígitos, tente novamente...\n'))
         os.system('pause')
@@ -60,21 +62,9 @@ class Banco:
             if valor_trans <= self.saldo:
                 self.saldo -= valor_trans
                 conta_destino.saldo += valor_trans
-                print(cor(2, '\nTRANSFERÊNCIA REALIZADA COM SUCESSO!\n'))
+                print(f"\nTransferência de {cor(1, f'R${valor_trans}')} para {cor(1, conta_destino.cliente)} realizada com sucesso! \n")
+            
             else:
                 print(erro('Saldo insuficiente!\n'))
         except ValueError:
             print(erro('ERRO! Valor para transferência inválido\n'))
-
-
-def validate_acc(dict_objects: dict) -> str:
-    """ Define um número de conta único de 4 dígitos
-
-    :param dict_objects: Dicionário com os Objetos (Contas Clientes)
-    :return: Retorna a string com número da conta
-    """
-    while True:
-        acc = str(choice(range(1000, 10000)))
-
-        if not dict_objects.get(acc):
-            return acc

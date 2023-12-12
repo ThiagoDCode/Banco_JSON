@@ -5,9 +5,9 @@ import os
 from time import sleep
 
 
-# Recupera e re-instância os Objetos (se existir), assim que o programa é rodado
+# Recupera e re-instância os Objetos (se existir) assim que o programa é rodado
 if os.path.exists('arquivos_banco.json'):
-    acc_account('arquivos_banco.json', contas_clientes)
+    reInstance_dados('arquivos_banco.json', contas_clientes)
 
 
 while True:
@@ -27,10 +27,10 @@ while True:
                 senha_cliente = ck.password_check('Senha de 4 dígitos: ')
                 deposito_inicial = ck.number_check('Valor de Depósito: R$')
             except Exception:
-                print(cor(3,'\nCancelado!!\n'))
+                print(cor(3, '\nCancelado!!\n'))
                 sleep(1.5)
             else:
-                create_acc(nome_cliente, cpf_cliente, senha_cliente, deposito_inicial)
+                create_account(contas_clientes, nome_cliente, cpf_cliente, senha_cliente, deposito_inicial)
 
         case 2:  # ACESSAR CONTA
             os.system('cls')

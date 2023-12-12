@@ -6,11 +6,11 @@ def name_validation():
         name_entry = input("Nome Completo: ").strip()
         
         if name_entry == '':
-            raise Exception()  # ENTER com campo de nome vazio -> cancela a criação de conta
+            raise Exception()  # ENTER com campo de nome vazio > cancela a criação de conta
         elif not name_entry.replace(' ', '').isalpha():
             print(erro('ERRO! Nome inválido, tente novamente...\n'))
         else:
-            return name_entry.title()
+            return name_entry.upper()
 
 
 def cpf_validation(dict_objects: dict, recover=False) -> str:
@@ -31,7 +31,7 @@ def cpf_validation(dict_objects: dict, recover=False) -> str:
             print(erro('CPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)\n'))
             continue
         
-        cpf = f'{cpf_entry[:3]}.{cpf_entry[3:6]}.{cpf_entry[6:9]}-{cpf_entry[9:]}'  # Formatação para padrão (000.000.000-00)
+        cpf = f'{cpf_entry[:3]}.{cpf_entry[3:6]}.{cpf_entry[6:9]}-{cpf_entry[9:]}'    # Formatação para padrão (000.000.000-00)
         
         if not recover and busca_cpf(dict_objects, cpf):
             print(erro('ERRO! CPF já cadastrado\n'))
