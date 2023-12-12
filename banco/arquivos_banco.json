@@ -1,13 +1,16 @@
 [
     {
-        "cliente": [
-            "MAIARA",
-            "TAVARES",
-            "ALVES"
-        ],
-        "cpf": "123.456.789-85",
+        "cliente": "Thiago Tavares Da Silva",
+        "cpf": "123.654.789-85",
         "senha": 1234,
-        "conta": "3987",
-        "saldo": 100.0
+        "conta": "1077",
+        "saldo": 500.0
+    },
+    {
+        "cliente": "Maria José De Almeida",
+        "cpf": "852.369.741-15",
+        "senha": 9876,
+        "conta": "5920",
+        "saldo": 5000.0
     }
 ]

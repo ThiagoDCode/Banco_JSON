@@ -15,24 +15,26 @@ while True:
     match menu('ABRIR CONTA', 'ACESSAR CONTA', 'ENCERRAR SESSÃO'):
 
         case 3:  # ENCERRAR SESSÃO
-            print('\nObrigado por escolher o DALLA$$ Bank\n')
+            print('\nObrigado por escolher o DALLA$$ BANK\n')
             break
 
         case 1:  # ABRIR CONTA
             os.system('cls')
+            
             try:
-                nome_cliente = ck.name_check('Nome do Cliente: ')
-                cpf_cliente = ck.validate_cpf('CPF do Cliente: ', contas_clientes)
-                senha_cliente = ck.verify_pass('Senha de 4 dígitos: ')
-                deposito_inicial = ck.verify_num('Valor de Depósito: R$')
+                nome_cliente = ck.name_validation()
+                cpf_cliente = ck.cpf_validation(contas_clientes)
+                senha_cliente = ck.password_check('Senha de 4 dígitos: ')
+                deposito_inicial = ck.number_check('Valor de Depósito: R$')
             except Exception:
-                print(cor(3, '\nAbertura de Conta Cancelada\n'))
+                print(cor(3,'\nCancelado!!\n'))
                 sleep(1.5)
             else:
                 create_acc(nome_cliente, cpf_cliente, senha_cliente, deposito_inicial)
 
         case 2:  # ACESSAR CONTA
             os.system('cls')
+            
             buscar_conta = input('Número da Conta: ')
             if buscar_conta == '':
                 continue
@@ -48,7 +50,7 @@ while True:
                                 os.system('cls')
                                 save_changes('arquivos_banco.json', contas_clientes)
                                 print('\n>>> SAINDO DA CONTA...')
-                                sleep(3)
+                                sleep(1.5)
                                 break
 
                             case 1:  # SACAR VALOR
@@ -65,12 +67,17 @@ while True:
                                 if contas_clientes.get(conta_destino):
                                     contas_clientes[buscar_conta].transferir(contas_clientes[conta_destino])
                                 else:
-                                    print(error('ERRO! Conta destinatária não encontrada\n'))
+                                    print(erro('ERRO! Conta destinatária não encontrada\n'))
 
                         os.system('pause')
+            
             except (KeyError, Exception):
-                print(error('ERRO! Conta ou Senha inválida\n'))
+                print(erro('ERRO! Conta ou Senha inválida\n'))
                 if input('Esqueceu? Deseja recuperar Conta/Senha ("S")? ').strip().upper() == 'S':
-                    if recover('arquivos_banco.json', contas_clientes):
-                        print(cor(2, '\nDADOS ATUALIZADOS COM SUCESSO!\n'))
+                    try:
+                        if recover('arquivos_banco.json', contas_clientes):
+                            print(cor(2, '\nDADOS ATUALIZADOS COM SUCESSO!\n'))
+                            sleep(1.5)
+                    except Exception:
+                        print(cor(3, "\nCancelado!!"))
                         sleep(1.5)

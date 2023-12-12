@@ -14,17 +14,11 @@ class Banco:
     def info_cliente(self):
         os.system('cls')
 
-        name_exclusions = ['DA', 'DAS', 'DE', 'DO', 'DOS']  # TODO: Fazer a separação pelo espaço entre o primeiro nome e o segundo/sobrenome.
-        if self.cliente[1] not in name_exclusions:
-            name = f'{self.cliente[0]} {self.cliente[1]}'
-        else:
-            name = self.cliente[0]
-
         # PRINT ------------------------------------------------------------------------
         print(f'<< INFORMAÇÕES DA CONTA >>'.center(32, '='))
-        print(f'Olá, {cor(1, name.title())}'
+        print(f'{cor(1, self.cliente)}'
               f'\nCPF: {cor(1, self.cpf)}  Conta: {cor(1, self.conta)}'
-              f'\nSaldo: {cor(1, f"{self.saldo:.2f}")}\n')
+              f'\nSaldo: {cor(1, f"R${self.saldo:.2f}")}\n')
         # ------------------------------------------------------------------------ PRINT
 
     def depositar(self):
@@ -35,9 +29,9 @@ class Banco:
                 print(f'\nDEPÓSITO EFETUADO COM SUCESSO!\n'
                       f'SALDO: R${self.saldo:.2f}\n')
             else:
-                print(error('ERRO! Valores negativos não é válido para depósito\n'))
+                print(erro('ERRO! Valores negativos não é válido para depósito\n'))
         except ValueError:
-            print(error('ERRO! Valor de depósito inválido\n'))
+            print(erro('ERRO! Valor de depósito inválido\n'))
 
     def sacar(self):
         try:
@@ -47,9 +41,9 @@ class Banco:
                 print(f'\nSAQUE EFETUADO COM SUCESSO!\n'
                       f'SALDO: R${self.saldo:.2f}\n')
             else:
-                print(error('ERRO! Saldo insuficiente\n'))
+                print(erro('ERRO! Saldo insuficiente\n'))
         except ValueError:
-            print(error('ERRO! Valor de saque inválido\n'))
+            print(erro('ERRO! Valor de saque inválido\n'))
 
     def check_pass(self, senha):
         try:
@@ -57,7 +51,7 @@ class Banco:
                 return True
             raise Exception()
         except ValueError:
-            print(error('ERRO! A senha é formada por 4 dígitos, tente novamente...\n'))
+            print(erro('ERRO! A senha é formada por 4 dígitos, tente novamente...\n'))
         os.system('pause')
 
     def transferir(self, conta_destino):
@@ -68,9 +62,9 @@ class Banco:
                 conta_destino.saldo += valor_trans
                 print(cor(2, '\nTRANSFERÊNCIA REALIZADA COM SUCESSO!\n'))
             else:
-                print(error('Saldo insuficiente!\n'))
+                print(erro('Saldo insuficiente!\n'))
         except ValueError:
-            print(error('ERRO! Valor para transferência inválido\n'))
+            print(erro('ERRO! Valor para transferência inválido\n'))
 
 
 def validate_acc(dict_objects: dict) -> str:

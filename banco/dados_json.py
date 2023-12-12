@@ -1,5 +1,5 @@
 import check_lib as ck
-from banco import *
+import banco
 from extras import *
 from time import sleep
 import json
@@ -11,9 +11,9 @@ contas_clientes = {}
 
 
 def create_acc(nome, cpf, senha, deposito):
-    conta_validated = validate_acc(contas_clientes)
+    conta_validated = banco.validate_acc(contas_clientes)
 
-    conta_cliente = Banco(nome, cpf, senha, conta_validated, deposito)
+    conta_cliente = banco.Banco(nome, cpf, senha, conta_validated, deposito)
     # Converte o Objeto em uma Lista de Dicionários e salva no JSON
     save_dados('arquivos_banco.json', conta_cliente)
     contas_clientes[conta_validated] = conta_cliente
@@ -41,7 +41,7 @@ def save_dados(arquivo, dados):
             with open(arquivo, 'w', encoding='UTF-8') as save:
                 save.write(json.dumps(nova_entrada, ensure_ascii=False, indent=4))
     except FileNotFoundError:
-        print(error('\nERRO! Ocorreu um problema no acesso ao banco de dados'))
+        print(erro('\nERRO! Ocorreu um problema no acesso ao banco de dados'))
         os.system('pause')
     else:
         print('\n=====<< CONTA CRIADA COM SUCESSO! >>=====')
@@ -61,11 +61,11 @@ def acc_account(arquivo, dict_objects):
             file.close()
 
         for obj in re_instance:
-            dict_objects[obj['conta']] = Banco(
+            dict_objects[obj['conta']] = banco.Banco(
                 obj['cliente'], obj['cpf'], obj['senha'], obj['conta'], obj['saldo']
             )
     except FileNotFoundError:
-        print(error('ERRO! Arquivo de dados não encontrado\n'))
+        print(erro('ERRO! Arquivo de dados não encontrado\n'))
         os.system('pause')
         return False
     else:
@@ -91,25 +91,23 @@ def recover(arquivo, dict_objects):
     os.system('cls')
 
     while True:
-        cpf_busca = ck.validate_cpf('CPF da Conta: ', dict_objects, recover=True)
-        if cpf_busca == '':
-            break
+        cpf_busca = ck.cpf_validation(dict_objects, recover=True)
 
         for conta in dict_objects.values():
             if conta.cpf == cpf_busca:
                 os.system('cls')
                 # PRINT --------------------------------------------------------------
                 print('=' * 35)
-                print(*conta.cliente)
-                print(f'CPF: {conta.cpf}   Conta: {conta.conta} \n'
+                print(cor(1, conta.cliente))
+                print(f'CPF: {cor(1, conta.cpf)}   Conta: {cor(1, conta.conta)} \n'
                       f'{"=" * 35}')
                 # -------------------------------------------------------------- PRINT
 
-                new_pass = ck.verify_pass('Digite a nova senha: ')
+                new_pass = ck.password_check('Digite a nova senha: ')
                 conta.senha = new_pass
                 save_changes(arquivo, dict_objects)
                 return True
 
-        print(error('ERRO! CPF não encontrado\n'))
+        print(erro('ERRO! CPF não encontrado\n'))
         os.system('pause')
         break

@@ -28,10 +28,10 @@ def menu(*options) -> int:
                 return resposta
             raise Exception()
         except (ValueError, Exception):
-            print(error('ERRO! Opção inválida, tente novamente...'))
+            print(erro('ERRO! Opção inválida, tente novamente...'))
 
 
-def error(txt):
+def erro(txt):
     return '\033[1;31m' + txt + '\033[m'
 
 
