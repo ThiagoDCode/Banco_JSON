@@ -14,7 +14,7 @@ class Banco:
     def info_cliente(self):
         os.system('cls')
 
-        name_exclusions = ['DA', 'DAS', 'DE', 'DO', 'DOS']
+        name_exclusions = ['DA', 'DAS', 'DE', 'DO', 'DOS']  # TODO: Fazer a separação pelo espaço entre o primeiro nome e o segundo/sobrenome.
         if self.cliente[1] not in name_exclusions:
             name = f'{self.cliente[0]} {self.cliente[1]}'
         else:

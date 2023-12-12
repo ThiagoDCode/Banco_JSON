@@ -14,7 +14,7 @@ def menu(*options) -> int:
     tamanho = 30
     # PRINT -------------------------------------------------------
     print(f'+{"=" * tamanho}+ \n'
-          f'|{"DALLA$$ Bank":^{tamanho}}| \n'
+          f'|{"DALLA$$ BANK":^{tamanho}}| \n'
           f'+{"=" * tamanho}+')
     for n, opt in enumerate(options):
         print(f'|{f" [{n + 1}] - {opt}":{tamanho}}!')
