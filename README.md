@@ -1,4 +1,4 @@
-# Sistema de Conta de Banco em Python
+# Sistema de Conta Bancária em Python
 
 *by* **Thiago <lee.code>**
 
@@ -7,9 +7,7 @@
 ---
 ## 📝 Descrição
 
-Sistema de abertura de contas de clientes em Banco, com sistemas para depósitos, saques e transferências.
-Com os dados e movimentações bancárias dos clientes sendo persistidos em arquivos JSON, que atua
-como "armazenamento de dados" para o sistema.
+Sistema de abertura de contas bancárias de clientes, tendo como objetivo o estudo das funcionalidades de arquivos JSON. Usando o tipo de arquivo JSON como um banco de dados.
 
 ---
 ## 🛠 Tecnologias Utilizadas
