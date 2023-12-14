@@ -1,45 +1,40 @@
-import extras as ex
+from extras import *
 
 
-def name_check(txt: str):
+def name_validation():
     while True:
-        name_entry = input(txt).strip().upper()
+        name_entry = input("Nome Completo: ").strip()
+        
         if name_entry == '':
-            # return False
-            raise Exception()
-
-        if not name_entry.replace(' ', '').isalpha():
-            print(ex.error('\nERRO! Nome inválido'))
+            raise Exception()  # ENTER com campo de nome vazio > cancela a criação de conta
+        elif not name_entry.replace(' ', '').isalpha():
+            print(erro('ERRO! Nome inválido, tente novamente...\n'))
         else:
-            name_entry = name_entry.split(' ')
-
-            return remove_item(name_entry, ' ', '')
+            return name_entry.upper()
 
 
-def validate_cpf(txt_user: str, dict_objects: dict, recover=False) -> str:
-    """ Verifica se o CPF contém 11 números e, converte o número para
-    o padrão CPF do Brazil (ex: 000.000.000-00)
+def cpf_validation(dict_objects: dict, recover=False) -> str:
+    """ Verifica se o CPF contém 11 números e o convertendo para o padrão de CPF Brasileiro (ex: 000.000.000-00). E faz a busca nos 
+    arquivos de dados de clientes para garantir que não haja CPFs duplicados.
 
-    :param txt_user: Texto exibido ao usuário
-    :param dict_objects: Dicionário de Objetos (Com as contas dos Clientes do Banco)
-    :param recover: Se True, retorna apenas o CPF formatado
+    :param dict_objects: Dicionário de Objetos (arquivo com os dados dos clientes)
+    :param recover: True, ignora a verificação de CPF duplicado.
     :return: Retorna o número CPF (verificado e formatado)
     """
+    
     while True:
-        cpf_entrada = input(txt_user).replace('.', '').replace('-', '').replace(' ', '')
-        if cpf_entrada == '':
-            raise Exception()
+        cpf_entry = input("CPF: ").replace('.', '').replace('-', '').replace(' ', '')
+        if cpf_entry == '':
+            raise Exception()  # ENTER com campo de CPF vazio -> cancela a criação de conta
 
-        if len(cpf_entrada) != 11 or not cpf_entrada.isdigit():
-            print(ex.error('CPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)\n'))
+        if len(cpf_entry) != 11 or not cpf_entry.isdigit():
+            print(erro('CPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)\n'))
             continue
-
-        cpf = f'{cpf_entrada[:3]}.{cpf_entrada[3:6]}.{cpf_entrada[6:9]}-{cpf_entrada[9:]}'
-        if recover:
-            return cpf
-
-        if busca_cpf(dict_objects, cpf):
-            print(ex.error('ERRO! CPF já cadastrado\n'))
+        
+        cpf = f'{cpf_entry[:3]}.{cpf_entry[3:6]}.{cpf_entry[6:9]}-{cpf_entry[9:]}'    # Formatação para padrão (000.000.000-00)
+        
+        if not recover and busca_cpf(dict_objects, cpf):
+            print(erro('ERRO! CPF já cadastrado\n'))
         else:
             return cpf
 
@@ -47,16 +42,17 @@ def validate_cpf(txt_user: str, dict_objects: dict, recover=False) -> str:
 def busca_cpf(dict_objects: dict, cpf_busca: str) -> bool:
     """ Verifica se o CPF informado já existe nos arquivos de dados.
 
-    :param dict_objects: Dicionário de Objetos (Com as contas dos Clientes do Banco)
+    :param dict_objects: Dicionário de Objetos (arquivo com dados dos clientes)
     :param cpf_busca: CPF a ser buscado nos arquivos de dados
     :return: True, caso CPF seja encontrado nos arquivos de dados
     """
+    
     for cliente in dict_objects.values():
         if cliente.cpf == cpf_busca:
             return True
 
 
-def verify_pass(txt_user: str) -> int:
+def password_check(txt_user: str) -> int:
     """ Tratamento de entrada de senhas
 
     Args:
@@ -73,10 +69,10 @@ def verify_pass(txt_user: str) -> int:
         if len(senha) == 4 and senha.isdigit():
             return int(senha)
         else:
-            print(ex.error('ERRO! A senha deve conter apenas e exatos 4 dígitos\n'))
+            print(erro('ERRO! A senha deve conter apenas e exatos 4 dígitos\n'))
 
 
-def verify_num(txt_user: str) -> float:
+def number_check(txt_user: str) -> float:
     """ Tratamento de entrada de números INT/FLOAT
 
     Args:
@@ -94,7 +90,7 @@ def verify_num(txt_user: str) -> float:
             if float(valor):
                 return float(valor)
         except ValueError:
-            print(ex.error('ERRO! Valor inserido inválido\n'))
+            print(erro('ERRO! Valor inserido inválido\n'))
 
 
 def remove_item(my_list: list, *args) -> list:

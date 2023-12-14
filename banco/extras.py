@@ -14,7 +14,7 @@ def menu(*options) -> int:
     tamanho = 30
     # PRINT -------------------------------------------------------
     print(f'+{"=" * tamanho}+ \n'
-          f'|{"DALLA$$ Bank":^{tamanho}}| \n'
+          f'|{"DALLA$$ BANK":^{tamanho}}| \n'
           f'+{"=" * tamanho}+')
     for n, opt in enumerate(options):
         print(f'|{f" [{n + 1}] - {opt}":{tamanho}}!')
@@ -28,10 +28,10 @@ def menu(*options) -> int:
                 return resposta
             raise Exception()
         except (ValueError, Exception):
-            print(error('ERRO! Opção inválida, tente novamente...'))
+            print(erro('ERRO! Opção inválida, tente novamente...'))
 
 
-def error(txt):
+def erro(txt):
     return '\033[1;31m' + txt + '\033[m'
 
 

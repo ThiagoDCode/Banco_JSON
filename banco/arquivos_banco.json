@@ -1,59 +1,37 @@
 [
     {
-        "cliente": [
-            "THIAGO",
-            "DA",
-            "SILVA"
-        ],
-        "cpf": "123.654.789-85",
-        "senha": 2222,
-        "conta": "1747",
-        "saldo": 370.0
-    },
-    {
-        "cliente": [
-            "MARIA",
-            "JOSÉ",
-            "DA",
-            "SILVA"
-        ],
-        "cpf": "987.456.321-25",
-        "senha": 1234,
-        "conta": "2183",
-        "saldo": 100.0
-    },
-    {
-        "cliente": [
-            "DALLAS",
-            "DOS",
-            "SANTOS"
-        ],
-        "cpf": "654.123.987-65",
-        "senha": 4321,
-        "conta": "1962",
-        "saldo": 1050.5
-    },
-    {
-        "cliente": [
-            "NIELLY",
-            "ALVES",
-            "DA",
-            "SILVA"
-        ],
+        "cliente": "THIAGO ALMEIDA DA SILVA",
         "cpf": "321.456.987-85",
-        "senha": 1234,
-        "conta": "6545",
-        "saldo": 350.0
+        "senha": 4321,
+        "conta": "8393",
+        "saldo": 475.75
     },
     {
-        "cliente": [
-            "CLOE",
-            "DE",
-            "JESUS"
-        ],
-        "cpf": "258.963.147-25",
-        "senha": 3333,
-        "conta": "4243",
-        "saldo": 700.0
+        "cliente": "DALLAS DOS SANTOS",
+        "cpf": "856.654.123-02",
+        "senha": 3215,
+        "conta": "7987",
+        "saldo": 20.0
+    },
+    {
+        "cliente": "MAIARA ALVES TAVARES",
+        "cpf": "654.123.987-52",
+        "senha": 9630,
+        "conta": "4995",
+        "saldo": 435.0
+    },
+    {
+        "cliente": "EZEQUIEL TAVARES",
+        "cpf": "123.987.852-13",
+        "senha": 4321,
+        "conta": "7711",
+        "saldo": 1000.0
+    },
+    {
+        "cliente": "EDDY CROWNLY",
+        "cpf": "963.147.852-13",
+        "senha": 5213,
+        "conta": "9898",
+        "saldo": 100.0
     }
 ]
