@@ -14,11 +14,11 @@ while True:
     os.system('cls')
     match menu('ABRIR CONTA', 'ACESSAR CONTA', 'ENCERRAR SESSÃO'):
 
-        case 3:  # ENCERRAR SESSÃO
+        case 3: # ENCERRAR SESSÃO
             print('\nObrigado por escolher o DALLA$$ BANK\n')
             break
 
-        case 1:  # ABRIR CONTA
+        case 1: # ABRIR CONTA
             os.system('cls')
             
             try:
@@ -32,7 +32,7 @@ while True:
             else:
                 create_account(contas_clientes, nome_cliente, cpf_cliente, senha_cliente, deposito_inicial)
 
-        case 2:  # ACESSAR CONTA
+        case 2: # ACESSAR CONTA
             os.system('cls')
             
             buscar_conta = input('Número da Conta: ')
@@ -46,22 +46,22 @@ while True:
                         contas_clientes[buscar_conta].info_cliente()
                         match menu('SACAR', 'DEPOSITAR', 'TRANSFERIR', 'SAIR DA CONTA'):
 
-                            case 4:  # SAIR DA CONTA
+                            case 4: # SAIR DA CONTA
                                 os.system('cls')
                                 save_changes('arquivos_banco.json', contas_clientes)
                                 print('\n>>> SAINDO DA CONTA...')
                                 sleep(1.5)
                                 break
 
-                            case 1:  # SACAR VALOR
+                            case 1: # SACAR VALOR
                                 os.system('cls')
                                 contas_clientes[buscar_conta].sacar()
 
-                            case 2:  # DEPOSITAR VALOR
+                            case 2: # DEPOSITAR VALOR
                                 os.system('cls')
                                 contas_clientes[buscar_conta].depositar()
 
-                            case 3:  # TRANSFERIR VALOR
+                            case 3: # TRANSFERIR VALOR
                                 os.system('cls')
                                 conta_destino = input('Número da Conta Destinatária: ')
                                 if contas_clientes.get(conta_destino):
