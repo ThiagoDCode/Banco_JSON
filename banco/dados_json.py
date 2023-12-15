@@ -1,7 +1,6 @@
-import check_lib as ck
+from check_lib import *
 import banco
 from extras import *
-from time import sleep
 import json
 import os
 from random import choice
@@ -38,8 +37,8 @@ def create_account(dict_objects, nome, cpf, senha, deposito):
         print("=====<< CONTA CRIADA COM SUCESSO! >>=====")
         print(cor(1, nome))
         print(f'CPF: {cor(1, cpf)}       Conta: [ {cor(3, num_conta)} ] \n'
-            f'Saldo: {cor(1, f"R${deposito:.2f}")} \n'
-            f'{"=" * 41}\n')
+              f'Saldo: {cor(1, f"R${deposito:.2f}")} \n'
+              f'{"=" * 41}\n')
         # -------------------------------------------------------------- PRINT
         os.system("pause")
 
@@ -56,7 +55,7 @@ def save_dados(nova_conta):
         if not os.path.exists("arquivos_banco.json"):
             dados = [nova_conta.__dict__]
         
-        # Se o arquivo já existe, os dados são recuperados e é adicionado os novos dados
+        # Se o arquivo já existe, os dados são recuperados e os novos dados são adicionados
         else:
             with open("arquivos_banco.json", "r", encoding="UTF-8") as file:
                 dados = json.load(file)
@@ -68,14 +67,14 @@ def save_dados(nova_conta):
             save.write(json.dumps(dados, ensure_ascii=False, indent=4))
 
     except FileNotFoundError:
-        print(erro("\nERRO! Ocorreu um problema no acesso ao Bando de Dados..."))
+        print(cor(4, "\nERRO! Ocorreu um problema no acesso ao Bando de Dados..."))
         os.system("pause")
 
     else:
         return True
 
 
-def reInstance_dados(arquivo, dict_objects):
+def re_instance_dados(arquivo, dict_objects):
     """ Re-instância os dados JSON na class Banco
 
     :param arquivo: Arquivo JSON
@@ -93,7 +92,7 @@ def reInstance_dados(arquivo, dict_objects):
             )
     
     except FileNotFoundError:
-        print(erro('ERRO! Arquivo de dados não encontrado\n'))
+        print(cor(4, 'ERRO! Arquivo de dados não encontrado\n'))
         os.system('pause')
         return False
     else:
@@ -120,7 +119,7 @@ def recover(arquivo, dict_objects):
     """ Recupera os dados de um usuário, e redefinindo sua senha.
 
     Args:
-        arquivo (json): Arquivo JSON com os dados
+        arquivo (.json): Arquivo JSON com os dados
         dict_objects (dict): Dicionário com a lista de clientes
 
     Returns:
@@ -129,7 +128,7 @@ def recover(arquivo, dict_objects):
     os.system('cls')
 
     while True:
-        cpf_busca = ck.cpf_validation(dict_objects, recover=True)
+        cpf_busca = cpf_validation(dict_objects, recover=True)
 
         for conta in dict_objects.values():
             if conta.cpf == cpf_busca:
@@ -138,14 +137,14 @@ def recover(arquivo, dict_objects):
                 print('=' * 35)
                 print(cor(1, conta.cliente))
                 print(f'CPF: {cor(1, conta.cpf)}   Conta: {cor(1, conta.conta)} \n'
-                    f'{"=" * 35}')
+                      f'{"=" * 35}')
                 # -------------------------------------------------------------- PRINT
 
-                new_pass = ck.password_check('Digite a nova senha: ')
+                new_pass = password_check('Digite a nova senha: ')
                 conta.senha = new_pass
                 save_changes(arquivo, dict_objects)
                 return True
 
-        print(erro('ERRO! CPF não encontrado\n'))
+        print(cor(4, 'ERRO! CPF não encontrado\n'))
         os.system('pause')
         break

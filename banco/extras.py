@@ -11,14 +11,14 @@ def menu(*options) -> int:
         Returns:
             Retorna o valor de entrada na resposta
         """
-    tamanho = 30
+
     # PRINT -------------------------------------------------------
-    print(f'+{"=" * tamanho}+ \n'
-          f'|{"DALLA$$ BANK":^{tamanho}}| \n'
-          f'+{"=" * tamanho}+')
-    for n, opt in enumerate(options):
-        print(f'|{f" [{n + 1}] - {opt}":{tamanho}}!')
-    print(f'+{"=" * tamanho}+')
+    print("=============================")
+    print("|        DALLA$ BANK        |")
+    print("=============================")
+    for num, opt in enumerate(options):
+        print(f"| {f'[{num + 1}] - {opt}':{26}}|")
+    print("=============================")
     # ------------------------------------------------------- PRINT
 
     while True:
@@ -26,13 +26,9 @@ def menu(*options) -> int:
             resposta = int(input('|> '))
             if 0 < resposta <= len(options):
                 return resposta
-            raise Exception()
+            raise Exception()  # Qualquer valor diferente dos que esperados, cai no 'except Exception' (opção inválida)
         except (ValueError, Exception):
-            print(erro('ERRO! Opção inválida, tente novamente...'))
-
-
-def erro(txt):
-    return '\033[1;31m' + txt + '\033[m'
+            print(cor(4, "ERRO! Opção inválida, tente novamente..."))
 
 
 def cor(cor_txt=0, txt=''):
@@ -49,4 +45,6 @@ def cor(cor_txt=0, txt=''):
         3: '\033[93m',   # Amarelo
     }
 
+    if cor_txt == 4:  # Destaque de ERRO
+        return '\033[1;31m' + txt + '\033[m'
     return cores[cor_txt] + str(txt) + cores[0]
