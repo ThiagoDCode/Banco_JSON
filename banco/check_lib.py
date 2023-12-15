@@ -1,4 +1,4 @@
-from extras import *
+from extras import erro
 
 
 def name_validation():
@@ -6,7 +6,7 @@ def name_validation():
         name_entry = input("Nome Completo: ").strip()
         
         if name_entry == '':
-            raise Exception()  # ENTER com campo de nome vazio > cancela a criação de conta
+            raise KeyboardInterrupt  # ENTER com campo vazio cancela a criação de conta
         elif not name_entry.replace(' ', '').isalpha():
             print(erro('ERRO! Nome inválido, tente novamente...\n'))
         else:
@@ -14,8 +14,8 @@ def name_validation():
 
 
 def cpf_validation(dict_objects: dict, recover=False) -> str:
-    """ Verifica se o CPF contém 11 números e o convertendo para o padrão de CPF Brasileiro (ex: 000.000.000-00). E faz a busca nos 
-    arquivos de dados de clientes para garantir que não haja CPFs duplicados.
+    """ Verifica se o CPF contém 11 números e o convertendo para o padrão de CPF Brasileiro (ex: 000.000.000-00). E faz
+    a busca nos arquivos de dados de clientes para garantir que não haja CPFs duplicados.
 
     :param dict_objects: Dicionário de Objetos (arquivo com os dados dos clientes)
     :param recover: True, ignora a verificação de CPF duplicado.
@@ -25,13 +25,14 @@ def cpf_validation(dict_objects: dict, recover=False) -> str:
     while True:
         cpf_entry = input("CPF: ").replace('.', '').replace('-', '').replace(' ', '')
         if cpf_entry == '':
-            raise Exception()  # ENTER com campo de CPF vazio -> cancela a criação de conta
+            raise KeyboardInterrupt  # ENTER com campo cancela a criação de conta
 
         if len(cpf_entry) != 11 or not cpf_entry.isdigit():
             print(erro('CPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)\n'))
             continue
-        
-        cpf = f'{cpf_entry[:3]}.{cpf_entry[3:6]}.{cpf_entry[6:9]}-{cpf_entry[9:]}'    # Formatação para padrão (000.000.000-00)
+
+        # Formatação para padrão (000.000.000-00)
+        cpf = f'{cpf_entry[:3]}.{cpf_entry[3:6]}.{cpf_entry[6:9]}-{cpf_entry[9:]}'
         
         if not recover and busca_cpf(dict_objects, cpf):
             print(erro('ERRO! CPF já cadastrado\n'))
@@ -64,7 +65,7 @@ def password_check(txt_user: str) -> int:
     while True:
         senha = input(txt_user)
         if senha == '':
-            raise Exception()
+            raise KeyboardInterrupt  # ENTER com campo vazio cancela a criação de conta
 
         if len(senha) == 4 and senha.isdigit():
             return int(senha)
@@ -84,7 +85,7 @@ def number_check(txt_user: str) -> float:
     while True:
         valor = input(txt_user)
         if valor == '':
-            raise Exception()
+            raise KeyboardInterrupt  # ENTER com campo vazio cancela a criação da conta
 
         try:
             if float(valor):

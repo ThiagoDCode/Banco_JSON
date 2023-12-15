@@ -16,8 +16,8 @@ class Banco:
         # PRINT ------------------------------------------------------------------------
         print(f'<< INFORMAÇÕES DA CONTA >>'.center(32, '='))
         print(f'{cor(1, self.cliente)}'
-            f'\nCPF: {cor(1, self.cpf)}  Conta: {cor(1, self.conta)}'
-            f'\nSaldo: {cor(1, f"R${self.saldo:.2f}")}\n')
+              f'\nCPF: {cor(1, self.cpf)}  Conta: {cor(1, self.conta)}'
+              f'\nSaldo: {cor(1, f"R${self.saldo:.2f}")}\n')
         # ------------------------------------------------------------------------ PRINT
 
     def depositar(self):
@@ -26,7 +26,7 @@ class Banco:
             if valor_deposito > 0:
                 self.saldo += valor_deposito
                 print(f'\nDEPÓSITO EFETUADO COM SUCESSO!\n'
-                    f'SALDO: R${self.saldo:.2f}\n')
+                      f'SALDO: R${self.saldo:.2f}\n')
            
             else:
                 print(erro('ERRO! Valores negativos não é válido para depósito\n'))
@@ -39,7 +39,7 @@ class Banco:
             if valor_saque <= self.saldo:
                 self.saldo -= valor_saque if valor_saque > 0 else (-valor_saque)  # TODO: vê melhor forma de converter
                 print(f'\nSAQUE EFETUADO COM SUCESSO!\n'
-                    f'SALDO: R${self.saldo:.2f}\n')
+                      f'SALDO: R${self.saldo:.2f}\n')
             
             else:
                 print(erro('ERRO! Saldo insuficiente\n'))
@@ -62,7 +62,8 @@ class Banco:
             if valor_trans <= self.saldo:
                 self.saldo -= valor_trans
                 conta_destino.saldo += valor_trans
-                print(f"\nTransferência de {cor(1, f'R${valor_trans}')} para {cor(1, conta_destino.cliente)} realizada com sucesso! \n")
+                print(f"\nTransferência de {cor(1, f'R${valor_trans}')} para "
+                      f"{cor(1, conta_destino.cliente)} realizada com sucesso! \n")
             
             else:
                 print(erro('Saldo insuficiente!\n'))

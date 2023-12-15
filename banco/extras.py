@@ -26,7 +26,7 @@ def menu(*options) -> int:
             resposta = int(input('|> '))
             if 0 < resposta <= len(options):
                 return resposta
-            raise Exception()
+            raise Exception()  # Qualquer valor diferente dos que esperados, cai no 'except Exception' (opção inválida)
         except (ValueError, Exception):
             print(erro('ERRO! Opção inválida, tente novamente...'))
 
