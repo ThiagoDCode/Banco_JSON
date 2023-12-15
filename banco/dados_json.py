@@ -67,7 +67,7 @@ def save_dados(nova_conta):
             save.write(json.dumps(dados, ensure_ascii=False, indent=4))
 
     except FileNotFoundError:
-        print(erro("\nERRO! Ocorreu um problema no acesso ao Bando de Dados..."))
+        print(cor(4, "\nERRO! Ocorreu um problema no acesso ao Bando de Dados..."))
         os.system("pause")
 
     else:
@@ -92,7 +92,7 @@ def re_instance_dados(arquivo, dict_objects):
             )
     
     except FileNotFoundError:
-        print(erro('ERRO! Arquivo de dados não encontrado\n'))
+        print(cor(4, 'ERRO! Arquivo de dados não encontrado\n'))
         os.system('pause')
         return False
     else:
@@ -145,6 +145,6 @@ def recover(arquivo, dict_objects):
                 save_changes(arquivo, dict_objects)
                 return True
 
-        print(erro('ERRO! CPF não encontrado\n'))
+        print(cor(4, 'ERRO! CPF não encontrado\n'))
         os.system('pause')
         break

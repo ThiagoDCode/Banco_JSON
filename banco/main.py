@@ -67,12 +67,12 @@ while True:
                                 if contas_clientes.get(conta_destino):
                                     contas_clientes[buscar_conta].transferir(contas_clientes[conta_destino])
                                 else:
-                                    print(erro('ERRO! Conta destinatária não encontrada\n'))
+                                    print(cor(4, 'ERRO! Conta destinatária não encontrada\n'))
 
                         os.system('pause')
             
             except (KeyError, Exception):
-                print(erro('ERRO! Conta ou Senha inválida\n'))
+                print(cor(4, 'ERRO! Conta ou Senha inválida\n'))
                 if input('Esqueceu? Deseja recuperar Conta/Senha ("S")? ').strip().upper() == 'S':
                     try:
                         if recover('arquivos_banco.json', contas_clientes):

@@ -29,9 +29,9 @@ class Banco:
                       f'SALDO: R${self.saldo:.2f}\n')
            
             else:
-                print(erro('ERRO! Valores negativos não é válido para depósito\n'))
+                print(cor(4, 'ERRO! Valores negativos não é válido para depósito\n'))
         except ValueError:
-            print(erro('ERRO! Valor de depósito inválido\n'))
+            print(cor(4, 'ERRO! Valor de depósito inválido\n'))
 
     def sacar(self):
         try:
@@ -42,9 +42,9 @@ class Banco:
                       f'SALDO: R${self.saldo:.2f}\n')
             
             else:
-                print(erro('ERRO! Saldo insuficiente\n'))
+                print(cor(4, 'ERRO! Saldo insuficiente\n'))
         except ValueError:
-            print(erro('ERRO! Valor de saque inválido\n'))
+            print(cor(4, 'ERRO! Valor de saque inválido\n'))
 
     def check_pass(self, senha):
         try:
@@ -53,7 +53,7 @@ class Banco:
             raise Exception()
         
         except ValueError:
-            print(erro('ERRO! A senha é formada por 4 dígitos, tente novamente...\n'))
+            print(cor(4, 'ERRO! A senha é formada por 4 dígitos, tente novamente...\n'))
         os.system('pause')
 
     def transferir(self, conta_destino):
@@ -66,6 +66,6 @@ class Banco:
                       f"{cor(1, conta_destino.cliente)} realizada com sucesso! \n")
             
             else:
-                print(erro('Saldo insuficiente!\n'))
+                print(cor(4, 'Saldo insuficiente!\n'))
         except ValueError:
-            print(erro('ERRO! Valor para transferência inválido\n'))
+            print(cor(4, 'ERRO! Valor para transferência inválido\n'))

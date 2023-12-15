@@ -1,4 +1,4 @@
-from extras import erro
+from extras import cor
 
 
 def name_validation():
@@ -8,7 +8,7 @@ def name_validation():
         if name_entry == '':
             raise KeyboardInterrupt  # ENTER com campo vazio cancela a criação de conta
         elif not name_entry.replace(' ', '').isalpha():
-            print(erro('ERRO! Nome inválido, tente novamente...\n'))
+            print(cor(4, 'ERRO! Nome inválido, tente novamente...\n'))
         else:
             return name_entry.upper()
 
@@ -28,14 +28,14 @@ def cpf_validation(dict_objects: dict, recover=False) -> str:
             raise KeyboardInterrupt  # ENTER com campo cancela a criação de conta
 
         if len(cpf_entry) != 11 or not cpf_entry.isdigit():
-            print(erro('CPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)\n'))
+            print(cor(4, 'CPF INVÁLIDO! Número CPF requer 11 números (ex: 000.000.000-00)\n'))
             continue
 
         # Formatação para padrão (000.000.000-00)
         cpf = f'{cpf_entry[:3]}.{cpf_entry[3:6]}.{cpf_entry[6:9]}-{cpf_entry[9:]}'
         
         if not recover and busca_cpf(dict_objects, cpf):
-            print(erro('ERRO! CPF já cadastrado\n'))
+            print(cor(4, 'ERRO! CPF já cadastrado\n'))
         else:
             return cpf
 
@@ -70,7 +70,7 @@ def password_check(txt_user: str) -> int:
         if len(senha) == 4 and senha.isdigit():
             return int(senha)
         else:
-            print(erro('ERRO! A senha deve conter apenas e exatos 4 dígitos\n'))
+            print(cor(4, 'ERRO! A senha deve conter apenas e exatos 4 dígitos\n'))
 
 
 def number_check(txt_user: str) -> float:
@@ -91,7 +91,7 @@ def number_check(txt_user: str) -> float:
             if float(valor):
                 return float(valor)
         except ValueError:
-            print(erro('ERRO! Valor inserido inválido\n'))
+            print(cor(4, 'ERRO! Valor inserido inválido\n'))
 
 
 def remove_item(my_list: list, *args) -> list:
