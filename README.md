@@ -1,10 +1,7 @@
 # Sistema de Conta Bancária em Python
 
-*by* **Thiago <lee.code>**
-
 [![ThiagoDCode - Banco_JSON](https://img.shields.io/static/v1?label=ThiagoDCode&message=Banco_JSON&color=blue&logo=github)](https://github.com/ThiagoDCode/Banco_JSON "Ir para o repositório.")
 
----
 ## 📝 Descrição
 
 Sistema de abertura de contas bancárias de clientes, tendo como objetivo o estudo das funcionalidades de arquivos JSON. Usando o tipo de arquivo JSON como um banco de dados.
